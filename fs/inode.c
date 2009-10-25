@@ -1678,3 +1678,7 @@ bool inode_owner_or_capable(const struct inode *inode)
 	return false;
 }
 EXPORT_SYMBOL(inode_owner_or_capable);
+
+#define CREATE_TRACE_POINTS
+#include <trace/events/vfs.h>
+
