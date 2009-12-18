@@ -396,6 +396,24 @@ static void pm_dev_err(struct device *dev, pm_message_t state, char *info,
 		dev_name(dev), pm_verb(state.event), info, error);
 }
 
+static void device_show_time(struct device *dev, ktime_t starttime, pm_message_t state, char *info)
+{
+	ktime_t calltime;
+	s64 usecs64;
+	int usecs;
+
+	calltime = ktime_get();
+	usecs64 = ktime_to_ns(ktime_sub(calltime, starttime));
+	do_div(usecs64, NSEC_PER_USEC);
+	usecs = usecs64;
+	if (usecs == 0)
+		usecs = 1;
+	if ((usecs / USEC_PER_MSEC) > CONFIG_SR_REPORT_TIME_LIMIT)
+		pr_info("PM: %s%s%s of drv:%s dev:%s complete after %ld.%03ld msecs\n", info ?: "", info ? " " : "", pm_verb(state.event),
+		dev_driver_string(dev), dev_name(dev), usecs / USEC_PER_MSEC,
+		usecs % USEC_PER_MSEC);
+}
+
 static void dpm_show_time(ktime_t starttime, pm_message_t state, char *info)
 {
 	ktime_t calltime;
@@ -426,6 +444,7 @@ static void dpm_show_time(ktime_t starttime, pm_message_t state, char *info)
 static int device_resume_noirq(struct device *dev, pm_message_t state)
 {
 	int error = 0;
+	ktime_t starttime = ktime_get();
 
 	TRACE_DEVICE(dev);
 	TRACE_RESUME(0);
@@ -433,6 +452,7 @@ static int device_resume_noirq(struct device *dev, pm_message_t state)
 	if (dev->pm_domain) {
 		pm_dev_dbg(dev, state, "EARLY power domain ");
 		error = pm_noirq_op(dev, &dev->pm_domain->ops, state);
+		device_show_time(dev, starttime, state, "early");
 	} else if (dev->type && dev->type->pm) {
 		pm_dev_dbg(dev, state, "EARLY type ");
 		error = pm_noirq_op(dev, dev->type->pm, state);
@@ -515,6 +535,7 @@ static int device_resume(struct device *dev, pm_message_t state, bool async)
 {
 	int error = 0;
 	bool put = false;
+	ktime_t starttime = ktime_get();
 
 	TRACE_DEVICE(dev);
 	TRACE_RESUME(0);
@@ -568,6 +589,7 @@ static int device_resume(struct device *dev, pm_message_t state, bool async)
 		}
 	}
 
+	device_show_time(dev, starttime, state, NULL);
  End:
 	dev->power.is_suspended = false;
 
@@ -764,6 +786,7 @@ static pm_message_t resume_event(pm_message_t sleep_state)
 static int device_suspend_noirq(struct device *dev, pm_message_t state)
 {
 	int error;
+	ktime_t starttime = ktime_get();
 
 	if (dev->pm_domain) {
 		pm_dev_dbg(dev, state, "LATE power domain ");
@@ -785,6 +808,7 @@ static int device_suspend_noirq(struct device *dev, pm_message_t state)
 		error = pm_noirq_op(dev, dev->bus->pm, state);
 		if (error)
 			return error;
+		device_show_time(dev, starttime, state, "late");
 	}
 
 	return 0;
@@ -865,6 +889,7 @@ static int legacy_suspend(struct device *dev, pm_message_t state,
 static int __device_suspend(struct device *dev, pm_message_t state, bool async)
 {
 	int error = 0;
+	ktime_t starttime = ktime_get();
 
 	dpm_wait_for_children(dev, async);
 
@@ -917,6 +942,7 @@ static int __device_suspend(struct device *dev, pm_message_t state, bool async)
 		}
 	}
 
+	device_show_time(dev, starttime, state, NULL);
  End:
 	if (!error) {
 		dev->power.is_suspended = true;
