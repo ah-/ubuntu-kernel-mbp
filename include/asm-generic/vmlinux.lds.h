@@ -622,6 +622,7 @@
   	*(.initcall0s.init)						\
   	*(.initcall1.init)						\
   	*(.initcall1s.init)						\
+	*(.initcallearlyrootfs.init)					\
   	*(.initcall2.init)						\
   	*(.initcall2s.init)						\
   	*(.initcall3.init)						\
