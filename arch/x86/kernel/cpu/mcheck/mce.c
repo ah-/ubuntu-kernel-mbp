@@ -102,8 +102,8 @@ static int			cpu_missing;
 ATOMIC_NOTIFIER_HEAD(x86_mce_decoder_chain);
 EXPORT_SYMBOL_GPL(x86_mce_decoder_chain);
 
-void				(*cpu_specific_poll)(struct mce *);
-EXPORT_SYMBOL_GPL(cpu_specific_poll);
+void				(*mce_cpu_specific_poll)(struct mce *);
+EXPORT_SYMBOL_GPL(mce_cpu_specific_poll);
 
 /* MCA banks polled by the period polling timer for corrected events */
 DEFINE_PER_CPU(mce_banks_t, mce_poll_banks) = {
@@ -558,8 +558,8 @@ void machine_check_poll(enum mcp_flags flags, mce_banks_t *b)
 		if (!(flags & MCP_TIMESTAMP))
 			m.tsc = 0;
 
-		if (cpu_specific_poll && !under_injection() && !mce_dont_log_ce)
-			cpu_specific_poll(&m);
+		if (mce_cpu_specific_poll && !under_injection() && !mce_dont_log_ce)
+			mce_cpu_specific_poll(&m);
 
 		/*
 		 * Don't get the IP here because it's unlikely to
