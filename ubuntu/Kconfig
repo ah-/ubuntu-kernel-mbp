@@ -30,6 +30,7 @@ source "ubuntu/omnibook/Kconfig"
 ##
 ##
 ##
+source "ubuntu/aufs/Kconfig"
 ##
 ##
 ##
