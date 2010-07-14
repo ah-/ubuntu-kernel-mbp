@@ -11,6 +11,11 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/kmem.h>
 
+/* No sane architecture will #define these to anything else */
+#ifndef arch_add_exec_range
+#define arch_add_exec_range(mm, limit)  do { ; } while (0)
+#endif
+
 /**
  * kstrdup - allocate space for and copy an existing string
  * @s: the string to duplicate
@@ -237,6 +242,9 @@ void __vma_link_list(struct mm_struct *mm, struct vm_area_struct *vma,
 	vma->vm_next = next;
 	if (next)
 		next->vm_prev = vma;
+
+	if (vma->vm_flags & VM_EXEC)
+		arch_add_exec_range(mm, vma->vm_end);
 }
 
 #if defined(CONFIG_MMU) && !defined(HAVE_ARCH_PICK_MMAP_LAYOUT)

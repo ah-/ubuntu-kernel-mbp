@@ -102,6 +102,9 @@ struct fs_struct;
 struct perf_event_context;
 struct blk_plug;
 
+extern int disable_nx;
+extern int print_fatal_signals;
+
 /*
  * List of flags we want to share for kernel threads,
  * if only because they are not used by them anyway.
