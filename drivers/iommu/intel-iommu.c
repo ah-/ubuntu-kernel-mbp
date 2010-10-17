@@ -4125,6 +4125,15 @@ DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_INTEL, 0x0044, quirk_calpella_no_shadow_g
 DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_INTEL, 0x0062, quirk_calpella_no_shadow_gtt);
 DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_INTEL, 0x006a, quirk_calpella_no_shadow_gtt);
 
+static void __devinit quirk_ricoh_multifunction(struct pci_dev *dev)
+{
+	dmar_disabled = 1;
+}
+DECLARE_PCI_FIXUP_HEADER(0x1180, 0xe822, quirk_ricoh_multifunction);
+DECLARE_PCI_FIXUP_HEADER(0x1180, 0xe230, quirk_ricoh_multifunction);
+DECLARE_PCI_FIXUP_HEADER(0x1180, 0xe832, quirk_ricoh_multifunction);
+DECLARE_PCI_FIXUP_HEADER(0x1180, 0xe476, quirk_ricoh_multifunction);
+
 /* On Tylersburg chipsets, some BIOSes have been known to enable the
    ISOCH DMAR unit for the Azalia sound device, but not give it any
    TLB entries, which causes it to deadlock. Check for that.  We do
