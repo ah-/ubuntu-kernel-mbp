@@ -28,7 +28,7 @@ obj-$(CONFIG_FSAM7400)		+= fsam7400/
 ##
 ##
 ##
-obj-$(CONFIG_OMNIBOOK)		+= omnibook/
+#obj-$(CONFIG_OMNIBOOK)		+= omnibook/
 ##
 ##
 ##
