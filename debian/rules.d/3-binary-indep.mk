@@ -85,6 +85,10 @@ install-tools:
 	install -d $(toolsman)/man1
 
 	install -m755 debian/tools/perf $(toolsbin)/perf
+	if [ "$(arch)" = "amd64" ] || [ "$(arch)" = "i386" ]; then \
+		install -m755 debian/tools/x86_energy_perf_policy $(toolsbin)/x86_energy_perf_policy; \
+		install -m755 debian/tools/turbostat $(toolsbin)/turbostat; \
+	fi
 
 	rm -rf $(builddir)/tools
 	install -d $(builddir)/tools
@@ -95,6 +99,11 @@ install-tools:
 	cd $(builddir)/tools/tools/perf && make man
 	install -m644 $(builddir)/tools/tools/perf/Documentation/*.1 \
 		$(toolsman)/man1
+	if [ "$(arch)" = "amd64" ] || [ "$(arch)" = "i386" ]; then \
+		install -d $(toolsman)/man8; \
+		install -m644 $(CURDIR)/tools/power/x86/x86_energy_perf_policy/*.8 $(toolsman)/man8; \
+		install -m644 $(CURDIR)/tools/power/x86/turbostat/*.8 $(toolsman)/man8; \
+	fi
 
 ifeq ($(do_common_headers_indep),true)
 install-indep-deps-$(do_flavour_header_package) += install-headers

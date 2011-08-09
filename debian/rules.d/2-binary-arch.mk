@@ -366,6 +366,10 @@ endif
 $(stampdir)/stamp-build-perarch: prepare-perarch
 ifeq ($(do_tools),true)
 	cd $(builddir)/tools/tools/perf && make $(CROSS_COMPILE)
+	if [ "$(arch)" = "amd64" ] || [ "$(arch)" = "i386" ]; then \
+		cd $(builddir)/tools/tools/power/x86/x86_energy_perf_policy && make $(CROSS_COMPILE); \
+		cd $(builddir)/tools/tools/power/x86/turbostat && make $(CROSS_COMPILE); \
+	fi
 endif
 	@touch $@
 
@@ -376,6 +380,12 @@ ifeq ($(do_tools),true)
 	install -d $(toolspkgdir)/usr/bin
 	install -s -m755 $(builddir)/tools/tools/perf/perf \
 		$(toolspkgdir)/usr/bin/perf_$(abi_release)
+	if [ "$(arch)" = "amd64" ] || [ "$(arch)" = "i386" ]; then \
+		install -s -m755 $(builddir)/tools/tools/power/x86/x86_energy_perf_policy/x86_energy_perf_policy \
+			$(toolspkgdir)/usr/bin/x86_energy_perf_policy_$(abi_release); \
+		install -s -m755 $(builddir)/tools/tools/power/x86/turbostat/turbostat \
+			$(toolspkgdir)/usr/bin/turbostat_$(abi_release); \
+	fi
 endif
 
 binary-perarch: toolspkg = $(tools_pkg_name)
