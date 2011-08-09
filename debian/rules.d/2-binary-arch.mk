@@ -355,17 +355,17 @@ $(stampdir)/stamp-flavours:
 $(stampdir)/stamp-prepare-perarch:
 	@echo "Preparing perarch ..."
 ifeq ($(do_tools),true)
-	rm -rf $(builddir)/tools-$*
-	install -d $(builddir)/tools-$*
-	for i in *; do ln -s $(CURDIR)/$$i $(builddir)/tools-$*/; done
-	rm $(builddir)/tools-$*/tools
-	rsync -a tools/ $(builddir)/tools-$*/tools/
+	rm -rf $(builddir)/tools
+	install -d $(builddir)/tools
+	for i in *; do ln -s $(CURDIR)/$$i $(builddir)/tools/; done
+	rm $(builddir)/tools/tools
+	rsync -a tools/ $(builddir)/tools/tools/
 endif
 	touch $@
 
 $(stampdir)/stamp-build-perarch: prepare-perarch
 ifeq ($(do_tools),true)
-	cd $(builddir)/tools-$*/tools/perf && make $(CROSS_COMPILE)
+	cd $(builddir)/tools/tools/perf && make $(CROSS_COMPILE)
 endif
 	@touch $@
 
@@ -374,7 +374,7 @@ install-perarch: $(stampdir)/stamp-build-perarch
 	# Add the tools.
 ifeq ($(do_tools),true)
 	install -d $(toolspkgdir)/usr/bin
-	install -s -m755 $(builddir)/tools-$*/tools/perf/perf \
+	install -s -m755 $(builddir)/tools/tools/perf/perf \
 		$(toolspkgdir)/usr/bin/perf_$(abi_release)
 endif
 
