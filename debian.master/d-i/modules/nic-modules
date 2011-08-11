@@ -23,6 +23,9 @@ arc-rawmode ?
 arc-rimi ?
 arlan ?
 at1700 ?
+ath5k ?
+ath9k ?
+ath9k_htc ?
 atl1 ?
 atl1c ?
 atl1e ?
@@ -113,7 +116,10 @@ rfc1051 ?
 rfc1201 ?
 rrunner ?
 rt2400 ?
+rt2400pci ?
 rt2500 ?
+rt2500pci ?
+rt2800pci ?
 rt61pci ?
 s2io ?
 shaper ?

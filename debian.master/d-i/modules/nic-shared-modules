@@ -13,6 +13,10 @@ cfg80211 ?
 
 # rt2x00 lib (since rt2x00 is split across usb/pci/cb
 rt2x00lib ?
+rt2800lib ?
+
+# Atheros library (since drivers are split across nic-modules/nic-usb-modules)
+ath ?
 
 # Wireless 802.11 modules
 lib80211 ?

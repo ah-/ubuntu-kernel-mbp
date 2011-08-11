@@ -9,6 +9,8 @@ zd1201 ?
 rt2500usb ?
 rt73usb ?
 rt2570 ?
+rt2800usb ?
+rt2x00usb ?
 cdc_ether ?
 asix ?
 cdc_eem ?
@@ -25,3 +27,4 @@ plusb ?
 rndis_host ?
 smsc95xx ?
 zaurus ?
+carl9170 ?
