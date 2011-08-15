@@ -32,7 +32,7 @@ obj-$(CONFIG_FSAM7400)		+= fsam7400/
 ##
 ##
 ##
-obj-$(CONFIG_AUFS_FS)		+= aufs/
+#obj-$(CONFIG_AUFS_FS)		+= aufs/
 ##
 ##
 ##
