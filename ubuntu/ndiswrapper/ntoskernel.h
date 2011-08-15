@@ -275,10 +275,6 @@ typedef u32 pm_message_t;
 #define PM_EVENT_SUSPEND 2
 #endif
 
-#if !defined(HAVE_NETDEV_PRIV)
-#define netdev_priv(dev)  ((dev)->priv)
-#endif
-
 #if LINUX_VERSION_CODE > KERNEL_VERSION(2,6,18)
 #define ISR_PT_REGS_PARAM_DECL
 #define ISR_PT_REGS_ARG
