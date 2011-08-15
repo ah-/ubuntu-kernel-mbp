@@ -7,6 +7,7 @@ linux (3.1.0-1.1) UNRELEASED; urgency=low
   [ Upstream Kernel Changes ]
 
   * rebase to v3.1-rc1
+  * rebase to v3.1-rc2
 
  -- Leann Ogasawara <leann.ogasawara@canonical.com>  Wed, 10 Aug 2011 15:43:38 -0700
 
