@@ -53,6 +53,20 @@ getall() {
 			(cd tmp; find lib/modules/$verabi-$sub/kernel -name '*.ko') | \
 				sed -e 's/.*\/\([^\/]*\)\.ko/\1/' | sort > \
 				$abidir/$arch/$sub.modules
+			(
+				cd tmp;
+				ko=`find lib/modules/$verabi-$sub/kernel -name '*.ko' | head -1`
+				readelf -p .comment "$ko" | awk '
+					($1 == "[") {
+						printf("%s", $3);
+						for (n=4; n<=NF; n++) {
+							printf(" %s", $n);
+						}
+						print ""
+					}' | sort -u >$abidir/$arch/$sub.compiler
+				version=`cat $abidir/$arch/$sub.compiler`
+				echo -n "$version..."
+			)
 			rm -rf tmp $filename
 			echo "done."
 		else
@@ -72,5 +86,10 @@ echo $abi > $abidir/abiname
 # current build.
 
 . $DEBIAN/etc/getabis
+
+compilers=`cat $abidir/*/*.compiler | sort -u | wc -l`
+if [ "$compilers" != 1 ]; then
+	echo "WARNING: inconsistant compiler versions detected" 1>&2
+fi
 
 rmdir $tmpdir
