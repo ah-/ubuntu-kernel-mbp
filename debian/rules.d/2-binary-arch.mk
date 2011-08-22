@@ -343,9 +343,6 @@ ifneq ($(full_build),false)
 	rm -rf $(dbgpkgdir)
 endif
 
-$(stampdir)/stamp-flavours:
-	@echo $(flavours) > $@
-
 #
 # per-architecture packages
 #
@@ -401,7 +398,7 @@ ifeq ($(do_tools),true)
 	dh_builddeb -p$(toolspkg)
 endif
 
-binary-debs: binary-perarch $(stampdir)/stamp-flavours $(addprefix binary-,$(flavours))
+binary-debs: binary-perarch $(addprefix binary-,$(flavours))
 
 build-arch-deps-$(do_flavour_image_package) += $(addprefix build-,$(flavours))
 build-arch: $(build-arch-deps-true)
