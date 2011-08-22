@@ -2,7 +2,8 @@ build-indep:
 
 docpkg = $(doc_pkg_name)
 docdir = $(CURDIR)/debian/$(docpkg)/usr/share/doc/$(docpkg)
-install-doc:
+install-doc: install-headers
+ifeq ($(do_doc_package),true)
 	dh_testdir
 	dh_testroot
 	dh_clean -k -p$(docpkg)
@@ -22,10 +23,12 @@ endif
 	cp -a Documentation/* $(docdir)
 	rm -rf $(docdir)/DocBook
 	find $(docdir) -name .gitignore | xargs rm -f
+endif
 
 indep_hdrpkg = $(hdrs_pkg_name)
 indep_hdrdir = $(CURDIR)/debian/$(indep_hdrpkg)/usr/src/$(indep_hdrpkg)
 install-headers:
+ifeq ($(do_flavour_header_package),true)
 	dh_testdir
 	dh_testroot
 	dh_clean -k -p$(indep_hdrpkg)
@@ -44,11 +47,13 @@ install-headers:
 	(find arch -name include -type d -print | \
 		xargs -n1 -i: find : -type f) | \
 		cpio -pd --preserve-modification-time $(indep_hdrdir)
+endif
 
 srcpkg = $(src_pkg_name)-source-$(release)
 srcdir = $(CURDIR)/debian/$(srcpkg)/usr/src/$(srcpkg)
 balldir = $(CURDIR)/debian/$(srcpkg)/usr/src/$(srcpkg)/$(srcpkg)
-install-source:
+install-source: install-doc
+ifeq ($(do_source_package),true)
 	dh_testdir
 	dh_testroot
 	dh_clean -k -p$(srcpkg)
@@ -72,11 +77,13 @@ ifeq ($(do_source_package_content),true)
 		cpio -pd --preserve-modification-time $(srcdir)
 	ln -s $(srcpkg)/$(srcpkg).tar.bz2 $(srcdir)/..
 endif
+endif
 
 install-tools: toolspkg = $(tools_common_pkg_name)
 install-tools: toolsbin = $(CURDIR)/debian/$(toolspkg)/usr/bin
 install-tools: toolsman = $(CURDIR)/debian/$(toolspkg)/usr/share/man
-install-tools:
+install-tools: install-source
+ifeq ($(do_tools),true)
 	dh_testdir
 	dh_testroot
 	dh_clean -k -p$(toolspkg)
@@ -104,14 +111,9 @@ install-tools:
 		install -m644 $(CURDIR)/tools/power/x86/x86_energy_perf_policy/*.8 $(toolsman)/man8; \
 		install -m644 $(CURDIR)/tools/power/x86/turbostat/*.8 $(toolsman)/man8; \
 	fi
-
-ifeq ($(do_common_headers_indep),true)
-install-indep-deps-$(do_flavour_header_package) += install-headers
 endif
-install-indep-deps-$(do_doc_package) += install-doc
-install-indep-deps-$(do_source_package) += install-source
-install-indep-deps-$(do_tools) += install-tools
-install-indep: $(install-indep-deps-true)
+
+install-indep: install-tools
 
 # This is just to make it easy to call manually. Normally done in
 # binary-indep target during builds.
