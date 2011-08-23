@@ -25,8 +25,6 @@ $(stampdir)/stamp-prepare-tree-%: $(commonconfdir)/config.common.$(family) $(arc
 	touch $@
 
 # Do the actual build, including image and modules
-build-%: $(stampdir)/stamp-build-%
-	@# Empty for make to be happy
 $(stampdir)/stamp-build-%: target_flavour = $*
 $(stampdir)/stamp-build-%: $(stampdir)/stamp-prepare-%
 	@echo "Building $*..."
@@ -400,7 +398,7 @@ endif
 
 binary-debs: binary-perarch $(addprefix binary-,$(flavours))
 
-build-arch-deps-$(do_flavour_image_package) += $(addprefix build-,$(flavours))
+build-arch-deps-$(do_flavour_image_package) += $(addprefix $(stampdir)/stamp-build-,$(flavours))
 build-arch: $(build-arch-deps-true)
 
 ifeq ($(AUTOBUILD),)
