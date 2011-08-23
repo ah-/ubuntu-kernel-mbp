@@ -76,3 +76,7 @@ value CONFIG_IMA n
 # Ensure CONFIG_IPV6 is y, if this is a module we get a module load for
 # every ipv6 packet, bad.
 value CONFIG_IPV6 y
+
+# Ensure ECRYPT_FS is y as it cannot be autoloaded and it has complex
+# dependancies which can pull it =m at a whim.
+value CONFIG_ECRYPT_FS y
