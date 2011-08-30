@@ -81,3 +81,7 @@ value CONFIG_IPV6 y
 # Ensure ECRYPT_FS is y as it cannot be autoloaded and it has complex
 # dependancies which can pull it =m at a whim.
 value CONFIG_ECRYPT_FS y
+
+# Ensure CONFIG_EFI_VARS is y as debian-installer relies on having
+# access to efivars when installing in EFI mode. See LP:837332
+value CONFIG_EFI_VARS y
