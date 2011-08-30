@@ -84,4 +84,4 @@ value CONFIG_ECRYPT_FS y
 
 # Ensure CONFIG_EFI_VARS is y as debian-installer relies on having
 # access to efivars when installing in EFI mode. See LP:837332
-value CONFIG_EFI_VARS y
+value CONFIG_EFI_VARS y | !exists CONFIG_EFI_VARS
