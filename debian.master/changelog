@@ -13,6 +13,7 @@ linux (3.1.0-1.1) UNRELEASED; urgency=low
     +CONFIG_BLK_DEV_LOOP_MIN_COUNT=8
     -CONFIG_VIDEO_OMAP2_VOUT_VRFB=y
   * rebase to v3.1-rc4
+  * rebase to v3.1-rc5
 
  -- Leann Ogasawara <leann.ogasawara@canonical.com>  Wed, 10 Aug 2011 15:43:38 -0700
 
