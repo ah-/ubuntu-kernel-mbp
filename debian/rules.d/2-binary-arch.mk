@@ -37,6 +37,7 @@ $(stampdir)/stamp-build-%: $(stampdir)/stamp-prepare-%
 
 # Install the finished build
 install-%: pkgdir = $(CURDIR)/debian/$(bin_pkg_name)-$*
+install-%: pkgdir_ex = $(CURDIR)/debian/$(extra_pkg_name)-$*
 install-%: bindoc = $(pkgdir)/usr/share/doc/$(bin_pkg_name)-$*
 install-%: dbgpkgdir = $(CURDIR)/debian/$(bin_pkg_name)-$*-dbgsym
 install-%: basepkg = $(hdrs_pkg_name)
@@ -82,17 +83,16 @@ endif
 	# Remove all modules not in the inclusion list.
 	#
 	if [ -f $(DEBIAN)/control.d/$(target_flavour).inclusion-list ] ; then \
-		mkdir -p $(pkgdir)-ALL/lib/modules/$(abi_release)-$*; \
+		mkdir -p $(pkgdir_ex)/lib/modules/$(abi_release)-$*; \
 		mv $(pkgdir)/lib/modules/$(abi_release)-$*/kernel \
-			$(pkgdir)-ALL/lib/modules/$(abi_release)-$*/kernel; \
+			$(pkgdir_ex)/lib/modules/$(abi_release)-$*/kernel; \
 		$(SHELL) $(DROOT)/scripts/module-inclusion --master \
-			$(pkgdir)-ALL/lib/modules/$(abi_release)-$*/kernel \
+			$(pkgdir_ex)/lib/modules/$(abi_release)-$*/kernel \
 			$(pkgdir)/lib/modules/$(abi_release)-$*/kernel \
 			$(DEBIAN)/control.d/$(target_flavour).inclusion-list 2>&1 | \
 				tee $(target_flavour).inclusion-list.log; \
 		/sbin/depmod -b $(pkgdir) -ea -F $(pkgdir)/boot/System.map-$(abi_release)-$* \
 			$(abi_release)-$* 2>&1 |tee $(target_flavour).depmod.log; \
-		rm -rf $(pkgdir)-ALL; \
 	fi
 
 ifeq ($(no_dumpfile),)
@@ -274,9 +274,11 @@ endif
 endif
 
 binary-%: pkgimg = $(bin_pkg_name)-$*
+binary-%: pkgimg_ex = $(extra_pkg_name)-$*
 binary-%: pkghdr = $(hdrs_pkg_name)-$*
 binary-%: dbgpkg = $(bin_pkg_name)-$*-dbgsym
 binary-%: dbgpkgdir = $(CURDIR)/debian/$(bin_pkg_name)-$*-dbgsym
+binary-%: target_flavour = $*
 binary-%: install-%
 	dh_testdir
 	dh_testroot
@@ -290,6 +292,18 @@ binary-%: install-%
 	dh_gencontrol -p$(pkgimg)
 	dh_md5sums -p$(pkgimg)
 	dh_builddeb -p$(pkgimg) -- -Zbzip2 -z9
+
+	if [ -f $(DEBIAN)/control.d/$(target_flavour).inclusion-list ] ; then \
+		dh_installchangelogs -p$(pkgimg_ex); \
+		dh_installdocs -p$(pkgimg_ex); \
+		dh_compress -p$(pkgimg_ex); \
+		dh_fixperms -p$(pkgimg_ex) -X/boot/; \
+		dh_installdeb -p$(pkgimg_ex); \
+		dh_shlibdeps -p$(pkgimg_ex); \
+		dh_gencontrol -p$(pkgimg_ex); \
+		dh_md5sums -p$(pkgimg_ex); \
+		dh_builddeb -p$(pkgimg_ex) -- -Zbzip2 -z9; \
+	fi
 
 	dh_installchangelogs -p$(pkghdr)
 	dh_installdocs -p$(pkghdr)
