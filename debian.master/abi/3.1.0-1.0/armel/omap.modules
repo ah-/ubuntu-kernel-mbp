@@ -480,7 +480,6 @@ evbug
 f71805f
 f71882fg
 f75375s
-fat
 faulty
 fb_sys_fops
 fcrypt
@@ -1913,7 +1912,6 @@ vcan
 ves1820
 ves1x93
 veth
-vfat
 vgg2432a4
 videobuf2-core
 videobuf2-dma-contig
