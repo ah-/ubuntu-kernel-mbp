@@ -17,6 +17,7 @@ linux (3.1.0-1.1) UNRELEASED; urgency=low
   * rebase to v3.1-rc6
   * rebase to v3.1-rc7
   * rebase to v3.1-rc8
+  * rebase to v3.1-rc9
 
  -- Leann Ogasawara <leann.ogasawara@canonical.com>  Wed, 10 Aug 2011 15:43:38 -0700
 
