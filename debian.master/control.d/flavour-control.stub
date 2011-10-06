@@ -51,7 +51,7 @@ Package: linux-image-extra-PKGVER-ABINUM-FLAVOUR
 Architecture: ARCH
 Section: admin
 Priority: optional
-Depends: ${misc:Depends}, ${shlibs:Depends}, linux-image-PKGVER-ABINUM-FLAVOUR (= PKGVER)
+Depends: ${misc:Depends}, ${shlibs:Depends}, linux-image-PKGVER-ABINUM-FLAVOUR
 Description: Linux kernel image for version PKGVER on DESC
  This package contains the Linux kernel image for version PKGVER on
  DESC.
