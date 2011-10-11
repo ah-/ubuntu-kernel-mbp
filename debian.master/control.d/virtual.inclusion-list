@@ -35,6 +35,7 @@ drivers/net/e1000e/e1000e.ko
 drivers/net/eql.ko
 drivers/net/ifb.ko
 drivers/net/igbvf/igbvf.ko
+drivers/net/ixgbevf/ixgbevf.ko
 drivers/net/macvlan.ko
 drivers/net/macvtap.ko
 drivers/net/mii.ko
