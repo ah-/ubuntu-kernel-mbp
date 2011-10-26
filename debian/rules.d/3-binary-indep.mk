@@ -125,7 +125,7 @@ binary-headers: install-headers
 	dh_compress -p$(indep_hdrpkg)
 	dh_fixperms -p$(indep_hdrpkg)
 	dh_installdeb -p$(indep_hdrpkg)
-	dh_gencontrol -p$(indep_hdrpkg)
+	$(lockme) dh_gencontrol -p$(indep_hdrpkg)
 	dh_md5sums -p$(indep_hdrpkg)
 	dh_builddeb -p$(indep_hdrpkg)
 
@@ -138,6 +138,6 @@ binary-indep: install-indep
 	dh_compress -i
 	dh_fixperms -i
 	dh_installdeb -i
-	dh_gencontrol -i
+	$(lockme) dh_gencontrol -i
 	dh_md5sums -i
 	dh_builddeb -i

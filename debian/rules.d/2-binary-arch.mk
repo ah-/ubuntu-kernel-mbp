@@ -268,7 +268,7 @@ endif
 	dh_compress -plinux-libc-dev
 	dh_fixperms -plinux-libc-dev
 	dh_installdeb -plinux-libc-dev
-	dh_gencontrol -plinux-libc-dev -- $(libc_dev_version)
+	$(lockme) dh_gencontrol -plinux-libc-dev -- $(libc_dev_version)
 	dh_md5sums -plinux-libc-dev
 	dh_builddeb -plinux-libc-dev
 endif
@@ -289,7 +289,7 @@ binary-%: install-%
 	dh_fixperms -p$(pkgimg) -X/boot/
 	dh_installdeb -p$(pkgimg)
 	dh_shlibdeps -p$(pkgimg)
-	dh_gencontrol -p$(pkgimg)
+	$(lockme) dh_gencontrol -p$(pkgimg)
 	dh_md5sums -p$(pkgimg)
 	dh_builddeb -p$(pkgimg) -- -Zbzip2 -z9
 
@@ -300,7 +300,7 @@ binary-%: install-%
 		dh_fixperms -p$(pkgimg_ex) -X/boot/; \
 		dh_installdeb -p$(pkgimg_ex); \
 		dh_shlibdeps -p$(pkgimg_ex); \
-		dh_gencontrol -p$(pkgimg_ex); \
+		$(lockme) dh_gencontrol -p$(pkgimg_ex); \
 		dh_md5sums -p$(pkgimg_ex); \
 		dh_builddeb -p$(pkgimg_ex) -- -Zbzip2 -z9; \
 	fi
@@ -311,7 +311,7 @@ binary-%: install-%
 	dh_fixperms -p$(pkghdr)
 	dh_shlibdeps -p$(pkghdr)
 	dh_installdeb -p$(pkghdr)
-	dh_gencontrol -p$(pkghdr)
+	$(lockme) dh_gencontrol -p$(pkghdr)
 	dh_md5sums -p$(pkghdr)
 	dh_builddeb -p$(pkghdr)
 
@@ -324,7 +324,7 @@ ifneq ($(skipsub),true)
 		dh_fixperms -p$$pkg -X/boot/;		\
 		dh_shlibdeps -p$$pkg;			\
 		dh_installdeb -p$$pkg;			\
-		dh_gencontrol -p$$pkg;			\
+		$(lockme) dh_gencontrol -p$$pkg;			\
 		dh_md5sums -p$$pkg;			\
 		dh_builddeb -p$$pkg;			\
 	done
@@ -336,7 +336,7 @@ ifneq ($(skipdbg),true)
 	dh_compress -p$(dbgpkg)
 	dh_fixperms -p$(dbgpkg)
 	dh_installdeb -p$(dbgpkg)
-	dh_gencontrol -p$(dbgpkg)
+	$(lockme) dh_gencontrol -p$(dbgpkg)
 	dh_md5sums -p$(dbgpkg)
 	dh_builddeb -p$(dbgpkg)
 
@@ -349,12 +349,15 @@ ifneq ($(skipdbg),true)
 	mv ../$(dbgpkg)_$(release)-$(revision)_$(arch).deb \
 		../$(dbgpkg)_$(release)-$(revision)_$(arch).ddeb
 	set -e; \
-	if grep -qs '^Build-Debug-Symbols: yes$$' /CurrentlyBuilding; then \
-		sed -i '/^$(dbgpkg)_/s/\.deb /.ddeb /' debian/files; \
-	else \
-		grep -v '^$(dbgpkg)_.*$$' debian/files > debian/files.new; \
-		mv debian/files.new debian/files; \
-	fi
+	( \
+		$(lockme_cmd) 9 || exit 1; \
+		if grep -qs '^Build-Debug-Symbols: yes$$' /CurrentlyBuilding; then \
+			sed -i '/^$(dbgpkg)_/s/\.deb /.ddeb /' debian/files; \
+		else \
+			grep -v '^$(dbgpkg)_.*$$' debian/files > debian/files.new; \
+			mv debian/files.new debian/files; \
+		fi; \
+	) 9>$(lockme_file)
 	# Now, the package wont get into the archive, but it will get put
 	# into the debug system.
 endif
@@ -415,7 +418,7 @@ ifeq ($(do_tools),true)
 	dh_fixperms -p$(toolspkg)
 	dh_shlibdeps -p$(toolspkg)
 	dh_installdeb -p$(toolspkg)
-	dh_gencontrol -p$(toolspkg)
+	$(lockme) dh_gencontrol -p$(toolspkg)
 	dh_md5sums -p$(toolspkg)
 	dh_builddeb -p$(toolspkg)
 endif

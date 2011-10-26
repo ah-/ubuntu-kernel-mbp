@@ -220,3 +220,8 @@ ifneq ($(LOCAL_ENV_CC),)
 kmake += CC=$(LOCAL_ENV_CC) DISTCC_HOSTS=$(LOCAL_ENV_DISTCC_HOSTS)
 endif
 
+# Locking is required in parallel builds to prevent loss of contents
+# of the debian/files.
+lockme_file = $(CURDIR)/debian/.LOCK
+lockme_cmd = flock -w 60
+lockme = $(lockme_cmd) $(lockme_file)

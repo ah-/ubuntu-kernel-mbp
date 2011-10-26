@@ -33,6 +33,6 @@ do-binary-udebs: debian/control
 	[ -z "$dilist" ] || \
 	for i in $$dilist; do \
 	  dh_fixperms -p$$i; \
-	  dh_gencontrol -p$$i; \
+	  $(lockme) dh_gencontrol -p$$i; \
 	  dh_builddeb -p$$i; \
 	done
