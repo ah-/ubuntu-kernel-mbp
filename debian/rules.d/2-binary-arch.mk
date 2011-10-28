@@ -118,6 +118,15 @@ endif
 	       $(DROOT)/control-scripts/$$script > $(pkgdir)/DEBIAN/$$script;	\
 	  chmod 755 $(pkgdir)/DEBIAN/$$script;					\
 	done
+	# Install the postinit/postrm scripts in the extras package.
+	if [ -f $(DEBIAN)/control.d/$(target_flavour).inclusion-list ] ; then	\
+		install -d $(pkgdir_ex)/DEBIAN;					\
+		for script in postinst postrm ; do				\
+			sed -e 's/@@KVER@@/$(release)-$(abinum)-$(target_flavour)/g' \
+				debian/control-scripts/$$script.extra > $(pkgdir_ex)/DEBIAN/$$script; \
+			chmod 755 $(pkgdir_ex)/DEBIAN/$$script;			\
+		done;								\
+	fi
 
 	# Install the full changelog.
 ifeq ($(do_doc_package),true)
