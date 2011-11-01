@@ -908,8 +908,8 @@ void __init setup_arch(char **cmdline_p)
 		arm_dma_zone_size = mdesc->dma_zone_size;
 	}
 #endif
-	if (mdesc->soft_reboot)
-		reboot_setup("s");
+	if (mdesc->restart_mode)
+		reboot_setup(&mdesc->restart_mode);
 
 	init_mm.start_code = (unsigned long) _text;
 	init_mm.end_code   = (unsigned long) _etext;
