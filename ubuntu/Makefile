@@ -16,7 +16,7 @@
 ##
 ##
 ##
-obj-$(CONFIG_NDISWRAPPER)	+= ndiswrapper/
+#obj-$(CONFIG_NDISWRAPPER)	+= ndiswrapper/
 ##
 ##
 ##
