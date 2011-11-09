@@ -8,6 +8,8 @@ i386	PKGVER-ABINUM	virtual		PKGVER-ABINUM-virtual		-
 
 armel	PKGVER-ABINUM	omap		PKGVER-ABINUM-omap		-
 
+armhf	PKGVER-ABINUM	omap		PKGVER-ABINUM-omap		-
+
 # Ports
 # arch	version		flavour		installedname			suffix	bdep
 powerpc	PKGVER-ABINUM	powerpc			PKGVER-ABINUM-powerpc		-	
