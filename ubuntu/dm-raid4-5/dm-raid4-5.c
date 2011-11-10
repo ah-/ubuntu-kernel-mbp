@@ -54,6 +54,7 @@ static const char *version = "v0.2594b";
 #include "dm-region-hash.h"
 
 #include <linux/slab.h>
+#include <linux/module.h>
 
 /*
  * Configurable parameters
