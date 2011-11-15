@@ -85,3 +85,8 @@ value CONFIG_ECRYPT_FS y
 # Ensure CONFIG_EFI_VARS is y as debian-installer relies on having
 # access to efivars when installing in EFI mode. See LP:837332
 value CONFIG_EFI_VARS y | !exists CONFIG_EFI_VARS
+
+# Ensure CONFIG_FAT_FS is y for arm, needed to ensure we able to replace
+# a kernel with the same version.
+(( arch armel | arch armhf ) & value CONFIG_FAT_FS y) | \
+	value CONFIG_FAT_FS m
