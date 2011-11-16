@@ -21,8 +21,9 @@
 
   Author: Giuseppe Cavallaro <peppe.cavallaro@st.com>
 *******************************************************************************/
-
+#include <stdarg.h>
 #include <linux/io.h>
+#include <linux/printk.h>
 #include "mmc.h"
 
 /* MAC Management Counters register offset */
