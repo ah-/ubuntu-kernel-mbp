@@ -1,4 +1,3 @@
-ahci.ko ?
 sata_inic162x.ko ?
 sata_mv.ko ?
 sata_nv.ko ?

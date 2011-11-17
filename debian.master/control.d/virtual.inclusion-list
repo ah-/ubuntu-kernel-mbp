@@ -1,7 +1,6 @@
 arch/*/{crypto,kernel,oprofile}
 crypto/*
 drivers/acpi/*
-drivers/ata/ahci.ko
 drivers/block/nbd.ko
 drivers/block/floppy.ko
 drivers/block/cryptoloop.ko

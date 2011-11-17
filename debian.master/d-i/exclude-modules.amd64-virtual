@@ -11,3 +11,4 @@ nic-usb-modules
 nfs-modules
 speakup-modules
 ppp-modules
+sata-modules
