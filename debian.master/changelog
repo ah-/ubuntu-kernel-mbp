@@ -1,3 +1,12 @@
+linux (3.2.0-1.3) precise; urgency=low
+
+  [ Upstream Kernel Changes ]
+
+  * Ubuntu: Add ext2 to fs-core-modules
+    - LP: #893395
+
+ -- Leann Ogasawara <leann.ogasawara@canonical.com>  Mon, 21 Nov 2011 20:42:33 -0800
+
 linux (3.2.0-1.2) precise; urgency=low
 
   [ Andy Whitcroft ]
