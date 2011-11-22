@@ -316,6 +316,7 @@ bq24022
 bq27x00_battery
 br2684
 brcmfmac
+brcmsmac
 brcmutil
 bridge
 briq_panel
@@ -1537,6 +1538,7 @@ national
 natsemi
 navman
 nbd
+nci
 ncpfs
 ne2k-pci
 neofb
@@ -1548,6 +1550,7 @@ netjet
 netrom
 netxen_nic
 newtonkbd
+nfc
 nf_conntrack
 nf_conntrack_amanda
 nf_conntrack_broadcast
@@ -1567,6 +1570,7 @@ nf_conntrack_sane
 nf_conntrack_sip
 nf_conntrack_snmp
 nf_conntrack_tftp
+nfcwilink
 nf_defrag_ipv4
 nf_defrag_ipv6
 nf_nat
@@ -1816,6 +1820,8 @@ pm8001
 pmc551
 pmcraid
 pmu_battery
+pn533
+pn544
 pn_pep
 poseidon
 poulsbo
