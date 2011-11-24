@@ -6,7 +6,7 @@ linux (3.2.0-2.4) UNRELEASED; urgency=low
 
   [ Upstream Kernel Changes ]
 
-  * Rebase to 6fe4c6d466e95d31164f14b1ac4aefb51f0f4f82
+  * Rebase to v3.2-rc3
 
  -- Leann Ogasawara <leann.ogasawara@canonical.com>  Tue, 22 Nov 2011 02:48:38 -0800
 
