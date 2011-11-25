@@ -20,6 +20,7 @@ pata_it8213.ko ?
 pata_it821x.ko ?
 pata_jmicron.ko ?
 pata_legacy.ko ?
+pata_macio.ko ?
 pata_marvell.ko ?
 pata_mpiix.ko ?
 pata_netcell.ko ?
