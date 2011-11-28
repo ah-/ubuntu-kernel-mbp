@@ -1,4 +1,4 @@
-arch="armel"
+arch="armel armhf"
 supported="TI OMAP3"
 desc="TI OMAP3-based systems"
 target="Targeted towards boards such as Beagleboard, Gumstix, IGEPv2, etc."
