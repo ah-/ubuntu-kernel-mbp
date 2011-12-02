@@ -1734,7 +1734,6 @@ pata_it8213
 pata_it821x
 pata_jmicron
 pata_legacy
-pata_macio
 pata_marvell
 pata_mpiix
 pata_netcell

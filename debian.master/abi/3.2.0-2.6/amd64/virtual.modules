@@ -1,5 +1,8 @@
 6lowpan
 8021q
+8139cp
+8139too
+8390
 acpi_ipmi
 acpi_memhotplug
 acpi_pad
@@ -49,6 +52,7 @@ blowfish-x86_64
 bonding
 br2684
 bridge
+bsd_comp
 btrfs
 BusLogic
 cachefiles
@@ -91,11 +95,14 @@ dccp_diag
 dccp_ipv4
 dccp_ipv6
 dccp_probe
+de2104x
+de4x5
 decnet
 deflate
 des_generic
 dm-bufio
 dm-crypt
+dmfe
 dm-log
 dm-mirror
 dm-multipath
@@ -110,6 +117,8 @@ dm-thin-pool
 dm-zero
 dn_rtmsg
 dummy
+e1000
+e1000e
 ebt_802_3
 ebtable_broute
 ebtable_filter
@@ -161,6 +170,7 @@ gre
 hangcheck-timer
 ieee802154
 ifb
+igbvf
 ip6_queue
 ip6table_filter
 ip6table_mangle
@@ -232,6 +242,7 @@ irlan
 irnet
 iscsi_tcp
 isofs
+ixgbevf
 joydev
 khazad
 lapb
@@ -272,6 +283,7 @@ msdos
 msr
 multipath
 nbd
+ne2k-pci
 netconsole
 netrom
 nf_conntrack
@@ -325,12 +337,20 @@ parport
 parport_pc
 pcbc
 pci_slot
+pcnet32
 pcrypt
 phonet
 pktgen
 pn_pep
 ppdev
+ppp_async
+ppp_deflate
+ppp_mppe
 pppoatm
+pppoe
+pppox
+ppp_synctty
+pptp
 psmouse
 qla1280
 raid0
@@ -386,6 +406,7 @@ serport
 sha1-ssse3
 sha512_generic
 sit
+slip
 snd
 snd-ens1370
 snd-hrtimer
@@ -430,6 +451,7 @@ tipc
 ts_bm
 ts_fsm
 ts_kmp
+tulip
 tunnel4
 tunnel6
 twofish_common
@@ -437,10 +459,10 @@ twofish_generic
 twofish-x86_64
 twofish-x86_64-3way
 ufs
+uli526x
 usb-storage
 usbtouchscreen
 vesafb
-veth
 vfat
 vga16fb
 vgastate
@@ -451,6 +473,7 @@ vmw_balloon
 vmw_pvscsi
 vmxnet3
 wanrouter
+winbond-840
 wp512
 x25
 xcbc
@@ -459,6 +482,8 @@ xen-fbfront
 xenfs
 xen-gntalloc
 xen-gntdev
+xen-kbdfront
+xen-netback
 xen-pciback
 xfrm4_mode_beet
 xfrm4_mode_transport
@@ -472,6 +497,7 @@ xfrm6_tunnel
 xfrm_ipcomp
 xfrm_user
 xfs
+xircom_cb
 xor
 x_tables
 xt_addrtype
