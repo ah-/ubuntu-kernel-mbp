@@ -140,6 +140,7 @@ ahci_platform
 aiptek
 aircable
 ak881x
+ak8975
 alauda
 algif_hash
 algif_skcipher

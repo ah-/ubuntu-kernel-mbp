@@ -169,6 +169,7 @@ airo
 airo_cs
 airport
 ak881x
+ak8975
 alauda
 algif_hash
 algif_skcipher
@@ -249,7 +250,6 @@ atmtcp
 atp870u
 atxp1
 aty128fb
-atyfb
 au0828
 au8522
 authenc
@@ -433,7 +433,6 @@ cp210x
 cpia2
 cpqarray
 cpufreq_stats
-cpu-notifier-error-inject
 c-qcam
 cramfs
 crc7
@@ -1166,6 +1165,7 @@ iscsi_tcp
 isdn
 isdn_bsdcomp
 isdnhdlc
+isdnloop
 isight_firmware
 isl29003
 isl29018
@@ -1785,7 +1785,6 @@ pcmciamtd
 pcmcia_rsrc
 pcnet32
 pcnet_cs
-pcrypt
 pcspkr
 pcwd_pci
 pcwd_usb
@@ -2664,6 +2663,7 @@ tpm_atmel
 tpm_nsc
 tps6105x
 tps6105x-regulator
+tps65010
 tps65023-regulator
 tps6507x
 tps6507x-regulator
