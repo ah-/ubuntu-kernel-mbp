@@ -24,7 +24,7 @@ value CONFIG_DEFAULT_SECURITY_APPARMOR y
 !exists CONFIG_ACPI_CUSTOM_METHOD | value CONFIG_ACPI_CUSTOM_METHOD n
 # Default to 32768 on ARM, 65536 for everything else.
 ( ( arch armel | arch armhf ) & value CONFIG_DEFAULT_MMAP_MIN_ADDR 32768 ) | \
-	( value CONFIG_DEFAULT_MMAP_MIN_ADDR 65536)
+	( ( !arch armel & !arch armhf ) & value CONFIG_DEFAULT_MMAP_MIN_ADDR 65536)
 
 # CONFIG_USB_DEVICE_FS breaks udev USB firmware loading and is deprecated
 # ensure it is disabled.
