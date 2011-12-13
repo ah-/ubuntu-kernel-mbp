@@ -40,6 +40,7 @@ drivers/net/netconsole.ko
 drivers/net/ethernet/amd/pcnet32.ko
 drivers/net/ppp/*
 drivers/net/slip/*
+drivers/net/veth.ko
 drivers/net/vmxnet3/vmxnet3.ko
 drivers/net/xen-netback/*
 drivers/parport/parport.ko
