@@ -63,15 +63,22 @@ sub pred_first {
 sub pred_do {
 	my ($pred) = @_;
 	my (@a) = split(' ', $pred);
+	my $possible;
 
 	if ($a[0] eq 'arch') {
-		die "$P: $pred: malformed -- $pred <arch>\n" if ($#a != 1);
-		#print "    *** ARCH<$arch ?? $a[1]>\n";
-		return ($arch eq $a[1])
+		die "$P: $pred: malformed -- $pred <arch>\n" if ($#a < 1);
+		for $possible (@a[1..$#a]) {
+			#print "    *** ARCH<$flavour ?? $possible>\n";
+			return 1 if ($arch eq $possible);
+		}
+		return 0;
 	} elsif ($a[0] eq 'flavour') {
-		die "$P: $pred: malformed -- $pred <flavour>\n" if ($#a != 1);
-		#print "    *** FLAVOUR<$flavour ?? $a[1]>\n";
-		return ($flavour eq $a[1])
+		die "$P: $pred: malformed -- $pred <flavour>\n" if ($#a < 1);
+		for $possible (@a[1..$#a]) {
+			#print "    *** FLAVOUR<$flavour ?? $a[1]>\n";
+			return 1 if ($flavour eq $possible);
+		}
+		return 0;
 	} elsif ($a[0] eq 'value') {
 		die "$P: $pred: malformed -- $pred <name> <val>\n" if ($#a != 2);
 		#print "    *** CHECK<$a[1] $a[2] ?? " . $values{$a[1]} . ">\n";
@@ -199,13 +206,18 @@ if ($test >= 0) {
 
 	pred_test('nosuchcommand', undef, $eunkn);
 	pred_test('arch', undef, $epred);
-	pred_test('arch MYARCH MYARCH', undef, $epred);
 	pred_test('arch MYARCH', 1, undef);
+	pred_test('arch MYARCH NOTMYARCH', 1, undef);
+	pred_test('arch NOTMYARCH MYARCH', 1, undef);
+	pred_test('arch NOTMYARCH NOTMYARCH MYARCH', 1, undef);
+	pred_test('arch NOTMYARCH MYARCH NOTMYARCH', 1, undef);
 	pred_test('arch NOTMYARCH', 0, undef);
 
 	pred_test('flavour', undef, $epred);
-	pred_test('flavour MYFLAVOUR myflavour', undef, $epred);
 	pred_test('flavour MYFLAVOUR', 1, undef);
+	pred_test('flavour NOTMYFLAVOUR MYFLAVOUR', 1, undef);
+	pred_test('flavour NOTMYFLAVOUR NOTMYFLAVOUR MYFLAVOUR', 1, undef);
+	pred_test('flavour NOTMYFLAVOUR MYFLAVOUR NOTMYFLAVOUR', 1, undef);
 	pred_test('flavour NOTMYFLAVOUR', 0, undef);
 
 	pred_test('value', undef, $epred);
