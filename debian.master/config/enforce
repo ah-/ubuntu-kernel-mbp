@@ -88,5 +88,5 @@ value CONFIG_EFI_VARS y | !exists CONFIG_EFI_VARS
 
 # Ensure CONFIG_FAT_FS is y for arm, needed to ensure we able to replace
 # a kernel with the same version.
-(( arch armel | arch armhf ) & value CONFIG_FAT_FS y) | \
-	value CONFIG_FAT_FS m
+(arch armel armhf & value CONFIG_FAT_FS y) | \
+ (!arch armel armhf & value CONFIG_FAT_FS m)
