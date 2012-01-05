@@ -78,6 +78,7 @@ fs/binfmt_misc.ko
 fs/btrfs/*
 fs/cachefiles/cachefiles.ko
 fs/configfs/*
+fs/ext*/*
 fs/fat/*
 fs/nls/nls_cp437.ko
 fs/nls/nls_iso8859-1.ko
