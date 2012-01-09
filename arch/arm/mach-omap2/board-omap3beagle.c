@@ -60,8 +60,7 @@
  *	AXBX	= GPIO173, GPIO172, GPIO171: 1 1 1
  *	C1_3	= GPIO173, GPIO172, GPIO171: 1 1 0
  *	C4	= GPIO173, GPIO172, GPIO171: 1 0 1
- *	XMA = GPIO173, GPIO172, GPIO171: 0 0 0
- *	XMB = GPIO173, GPIO172, GPIO171: 0 0 1
+ *	XMA/XMB = GPIO173, GPIO172, GPIO171: 0 0 0
  *	XMC = GPIO173, GPIO172, GPIO171: 0 1 0
  */
 enum {
@@ -143,13 +142,9 @@ static void __init omap3_beagle_init_rev(void)
 		beagle_config.usr_button_gpio = 7;
 		break;
 	case 0:
-		printk(KERN_INFO "OMAP3 Beagle Rev: xM A\n");
+		printk(KERN_INFO "OMAP3 Beagle Rev: xM Ax/Bx\n");
 		omap3_beagle_version = OMAP3BEAGLE_BOARD_XM;
 		beagle_config.usb_pwr_level = GPIOF_OUT_INIT_HIGH;
-		break;
-	case 1:
-		printk(KERN_INFO "OMAP3 Beagle Rev: xM B\n");
-		omap3_beagle_version = OMAP3BEAGLE_BOARD_XM;
 		break;
 	case 2:
 		printk(KERN_INFO "OMAP3 Beagle Rev: xM C\n");
