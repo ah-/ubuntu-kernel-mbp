@@ -240,12 +240,6 @@ static void __init beagle_display_init(void)
 {
 	int r;
 
-	/* DVI reset GPIO is different between beagle revisions */
-	if (omap3_beagle_version == OMAP3BEAGLE_BOARD_XM)
-		beagle_dvi_device.reset_gpio = 129;
-	else
-		beagle_dvi_device.reset_gpio = 170;
-
 	r = gpio_request_one(beagle_dvi_device.reset_gpio, GPIOF_OUT_INIT_LOW,
 			     "DVI reset");
 	if (r < 0)
@@ -537,6 +531,10 @@ static void __init omap3_beagle_init(void)
 	omap_serial_init();
 	omap_sdrc_init(mt46h32m32lf6_sdrc_params,
 				  mt46h32m32lf6_sdrc_params);
+
+	omap_mux_init_gpio(170, OMAP_PIN_INPUT);
+	/* REVISIT leave DVI powered down until it's needed ... */
+	gpio_request_one(170, GPIOF_OUT_INIT_HIGH, "DVI_nPD");
 
 	usb_musb_init(NULL);
 	usbhs_init(&usbhs_bdata);
