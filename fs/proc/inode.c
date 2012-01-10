@@ -107,6 +107,14 @@ void __init proc_init_inodecache(void)
 
 static int proc_show_options(struct seq_file *seq, struct vfsmount *mnt)
 {
+	struct super_block *sb = mnt->mnt_sb;
+	struct pid_namespace *pid = sb->s_fs_info;
+
+	if (pid->pid_gid)
+		seq_printf(seq, ",gid=%lu", (unsigned long)pid->pid_gid);
+	if (pid->hide_pid != 0)
+		seq_printf(seq, ",hidepid=%u", pid->hide_pid);
+
 	return 0;
 }
 
