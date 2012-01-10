@@ -86,7 +86,6 @@ CONFIG_I2C_ALGOBIT=m
 # CONFIG_I2C_HELPER_AUTO is not set
 # CONFIG_I2C_I801 is not set
 # CONFIG_I2C_PXA_PCI is not set
-CONFIG_ICPLUS_PHY=y
 # CONFIG_IDE is not set
 # CONFIG_INTEL_MID_PTI is not set
 # CONFIG_INTR_REMAP is not set
