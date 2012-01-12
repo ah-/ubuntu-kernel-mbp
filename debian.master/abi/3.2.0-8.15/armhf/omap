@@ -6772,7 +6772,6 @@ EXPORT_SYMBOL_GPL drivers/usb/serial/usbserial 0xf2a711c6	usb_serial_generic_sub
 EXPORT_SYMBOL_GPL drivers/usb/serial/usbserial 0xf3e041b5	ezusb_set_reset
 EXPORT_SYMBOL_GPL drivers/usb/serial/usbserial 0xf903f6bf	usb_serial_generic_throttle
 EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x0a8669e1	usb_stor_resume
-EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x0be13004	usb_storage_usb_ids
 EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x18400e48	usb_stor_ctrl_transfer
 EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x1bc3edc2	usb_stor_sense_invalidCDB
 EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x2d5c60cf	usb_stor_bulk_transfer_buf
@@ -6781,7 +6780,6 @@ EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x5a44bf9b	usb_stor_disconnect
 EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x68e046c7	usb_stor_bulk_srb
 EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x6ce07c7a	usb_stor_probe2
 EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x748225eb	usb_stor_Bulk_reset
-EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x7cf6916c	usb_usual_ignore_device
 EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x83879005	usb_stor_CB_transport
 EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x87d70060	usb_stor_suspend
 EXPORT_SYMBOL_GPL drivers/usb/storage/usb-storage 0x88831f8c	usb_stor_transparent_scsi_command
@@ -7635,6 +7633,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x0b07abe2	unshare_fs_struct
 EXPORT_SYMBOL_GPL vmlinux 0x0b9e3cd2	blk_rq_unprep_clone
 EXPORT_SYMBOL_GPL vmlinux 0x0bb6f370	ip_local_out
 EXPORT_SYMBOL_GPL vmlinux 0x0bcf380e	fat_attach
+EXPORT_SYMBOL_GPL vmlinux 0x0be13004	usb_storage_usb_ids
 EXPORT_SYMBOL_GPL vmlinux 0x0bf096ac	find_pid_ns
 EXPORT_SYMBOL_GPL vmlinux 0x0c0174bf	ata_sff_tf_read
 EXPORT_SYMBOL_GPL vmlinux 0x0c0c015e	ring_buffer_swap_cpu
@@ -8063,6 +8062,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x3dd95ff6	snd_soc_codec_writable_register
 EXPORT_SYMBOL_GPL vmlinux 0x3de9cae1	crypto_remove_final
 EXPORT_SYMBOL_GPL vmlinux 0x3e995035	usb_hcd_check_unlink_urb
 EXPORT_SYMBOL_GPL vmlinux 0x3e9baca9	aead_geniv_free
+EXPORT_SYMBOL_GPL vmlinux 0x3edad223	usb_usual_clear_present
 EXPORT_SYMBOL_GPL vmlinux 0x3ee1d131	inet6_csk_reqsk_queue_hash_add
 EXPORT_SYMBOL_GPL vmlinux 0x3efab129	spi_async
 EXPORT_SYMBOL_GPL vmlinux 0x3f02ca87	spi_get_device_id
@@ -8582,6 +8582,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x7c8ce73b	led_classdev_resume
 EXPORT_SYMBOL_GPL vmlinux 0x7cc07725	inet_hash_connect
 EXPORT_SYMBOL_GPL vmlinux 0x7ceaf0d5	generic_handle_irq
 EXPORT_SYMBOL_GPL vmlinux 0x7cf5f900	usb_string
+EXPORT_SYMBOL_GPL vmlinux 0x7cf6916c	usb_usual_ignore_device
 EXPORT_SYMBOL_GPL vmlinux 0x7d12ead2	ref_module
 EXPORT_SYMBOL_GPL vmlinux 0x7d32d257	task_active_pid_ns
 EXPORT_SYMBOL_GPL vmlinux 0x7d398fdd	led_trigger_remove
@@ -8691,6 +8692,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x89678405	seccomp_get_filter
 EXPORT_SYMBOL_GPL vmlinux 0x896bba04	sock_prot_inuse_add
 EXPORT_SYMBOL_GPL vmlinux 0x89a85675	exportfs_encode_fh
 EXPORT_SYMBOL_GPL vmlinux 0x89b0f8e6	crypto_lookup_template
+EXPORT_SYMBOL_GPL vmlinux 0x89d4dbaf	usb_usual_check_type
 EXPORT_SYMBOL_GPL vmlinux 0x89de76b1	dm_suspended
 EXPORT_SYMBOL_GPL vmlinux 0x89fd9fe0	ata_std_qc_defer
 EXPORT_SYMBOL_GPL vmlinux 0x89ff43f6	init_uts_ns
@@ -9244,6 +9246,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xcd02854b	usb_poison_anchored_urbs
 EXPORT_SYMBOL_GPL vmlinux 0xcd263e74	blkio_alloc_blkg_stats
 EXPORT_SYMBOL_GPL vmlinux 0xcd8996b7	snd_soc_unregister_codec
 EXPORT_SYMBOL_GPL vmlinux 0xcd8cb00b	omap_dm_timer_set_load
+EXPORT_SYMBOL_GPL vmlinux 0xcd9991a9	usb_usual_set_present
 EXPORT_SYMBOL_GPL vmlinux 0xcda0a5ef	dm_path_uevent
 EXPORT_SYMBOL_GPL vmlinux 0xcdca3691	nr_irqs
 EXPORT_SYMBOL_GPL vmlinux 0xcde1e110	skcipher_geniv_init

@@ -189,6 +189,7 @@ adt7411
 adt7462
 adt7470
 adt7475
+adummy
 adutux
 adv7170
 adv7175
@@ -271,6 +272,7 @@ ar7part
 arc4
 arcfb
 arcmsr
+arcnet
 arc-rawmode
 arc-rimi
 ark3116
@@ -521,6 +523,7 @@ comm
 compal-laptop
 configfs
 contec_pci_dio
+cops
 cordic
 core
 coretemp
@@ -748,6 +751,7 @@ dvb-usb-digitv
 dvb-usb-dtt200u
 dvb-usb-dtv5100
 dvb-usb-dw2102
+dvb-usb-ec168
 dvb-usb-friio
 dvb-usb-gl861
 dvb-usb-gp8psk
@@ -799,6 +803,7 @@ ebt_snat
 ebt_stp
 ebt_ulog
 ebt_vlan
+ec100
 echo
 econet
 ec_sys
@@ -835,6 +840,7 @@ ems_usb
 em_text
 emu10k1-gp
 em_u32
+enc28j60
 enclosure
 ene_ir
 eni
@@ -842,7 +848,6 @@ enic
 epat
 epia
 epic100
-e_powersaver
 eql
 erst-dbg
 es3210
@@ -1778,17 +1783,9 @@ mtdblock
 mtdblock_ro
 mtdchar
 mtd_dataflash
-mtd_nandecctest
-mtd_oobtest
 mtdoops
-mtd_pagetest
 mtdram
-mtd_readtest
-mtd_speedtest
-mtd_stresstest
-mtd_subpagetest
 mtdswap
-mtd_torturetest
 mtouch
 multipath
 multiq3
@@ -3168,6 +3165,7 @@ u132-hcd
 u14-34f
 uartlite
 uas
+ub
 ubi
 ubifs
 ucb1400_core
