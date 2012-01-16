@@ -68,6 +68,7 @@ cifs
 cirrusfb
 clip
 cls_basic
+cls_cgroup
 cls_flow
 cls_fw
 cls_route
@@ -170,6 +171,7 @@ hangcheck-timer
 ieee802154
 ifb
 igbvf
+inet_diag
 ip6_queue
 ip6table_filter
 ip6table_mangle
@@ -410,6 +412,7 @@ snd
 snd-ens1370
 snd-hrtimer
 snd-hwdep
+snd-mixer-oss
 snd-page-alloc
 snd-pcm
 snd-pcsp
@@ -431,6 +434,7 @@ syscopyarea
 sysfillrect
 sysimgblt
 tcp_bic
+tcp_diag
 tcp_highspeed
 tcp_htcp
 tcp_hybla

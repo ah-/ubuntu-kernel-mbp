@@ -404,6 +404,7 @@ cirrusfb
 clearpad_tm1217
 clip
 cls_basic
+cls_cgroup
 cls_flow
 cls_fw
 cls_route
@@ -433,6 +434,7 @@ cp210x
 cpia2
 cpqarray
 cpufreq_stats
+cpu-notifier-error-inject
 c-qcam
 cramfs
 crc7
@@ -462,6 +464,8 @@ cx24110
 cx24113
 cx24116
 cx24123
+cx25821
+cx25821-alsa
 cx25840
 cx82310_eth
 cx8800
@@ -583,7 +587,6 @@ dstr
 dt3155v4l
 dtl1_cs
 dummy
-dummy_hcd
 dvb-as102
 dvb-bt8xx
 dvb-core
@@ -737,6 +740,7 @@ friq
 frpw
 fsa9480
 fscache
+fsl_elbc_nand
 ft1000
 ft1000_pcmcia
 ftdi-elan
@@ -760,12 +764,12 @@ g_dbgp
 gdth
 generic
 generic_bl
+generic_nvram
 gen_probe
 g_ether
 gf128mul
 gf2k
 g_ffs
-g_file_storage
 gfs2
 ghash-generic
 g_hid
@@ -779,6 +783,8 @@ g_mass_storage
 g_midi
 g_ncm
 g_nokia
+go7007
+go7007-usb
 goku_udc
 gpio-74x164
 gpio-addr-flash
@@ -1052,6 +1058,7 @@ imm
 imon
 imx074
 industrialio
+inet_diag
 inexio
 inftl
 initio
@@ -1164,7 +1171,7 @@ iscsi_tcp
 isdn
 isdn_bsdcomp
 isdnhdlc
-isdnloop
+isicom
 isight_firmware
 isl29003
 isl29018
@@ -1312,6 +1319,7 @@ lirc_bt829
 lirc_dev
 lirc_igorplugusb
 lirc_imon
+lirc_parallel
 lirc_sasem
 lirc_serial
 lirc_sir
@@ -1368,6 +1376,7 @@ mac53c94
 mac80211
 mac80211_hwsim
 mace
+mac_hid
 macvlan
 macvtap
 magellan
@@ -1467,7 +1476,6 @@ mlx4_en
 mlx4_ib
 mma8450
 mmc_block
-mmc_core
 mos7720
 mos7840
 moto_modem
@@ -1517,6 +1525,7 @@ mwifiex
 mwifiex_pcie
 mwifiex_sdio
 mwl8k
+mxb
 mxl111sf-demod
 mxl111sf-tuner
 mxl5005s
@@ -1648,6 +1657,7 @@ ntfs
 n_tracerouter
 n_tracesink
 nvidiafb
+nvram
 nxt200x
 nxt6000
 ocfs2
@@ -1753,6 +1763,7 @@ pata_sis
 pata_sl82c105
 pata_triflex
 pata_via
+pc300too
 pca9541
 pca954x
 pcbc
@@ -1774,12 +1785,14 @@ pch_udc
 pci
 pci200syn
 pcips2
+pci-stub
 pcmcia
 pcmcia_core
 pcmciamtd
 pcmcia_rsrc
 pcnet32
 pcnet_cs
+pcrypt
 pcspkr
 pcwd_pci
 pcwd_usb
@@ -1826,7 +1839,6 @@ ppa
 ppdev
 ppp_async
 ppp_deflate
-ppp_generic
 ppp_mppe
 pppoatm
 pppoe
@@ -1866,6 +1878,7 @@ r592
 r6040
 r8169
 r8187se
+r8192e_pci
 r8192u_usb
 r852
 r8712u
@@ -2091,8 +2104,11 @@ rtl8192cu
 rtl8192de
 rtl8192se
 rtlwifi
+rts5139
 rxkad
 s1d13xxxfb
+s2250
+s2250-loader
 s2255drv
 s2io
 s3fb
@@ -2190,7 +2206,6 @@ serpent
 serport
 ses
 sfc
-sg
 sha512_generic
 shpchp
 sht15
@@ -2219,7 +2234,6 @@ sky2
 sl811_cs
 sl811-hcd
 slcan
-slhc
 slip
 slram
 sm501
@@ -2327,6 +2341,7 @@ snd-lx6464es
 snd-maestro3
 snd-mia
 snd-mixart
+snd-mixer-oss
 snd-mona
 snd-mpu401
 snd-mpu401-uart
@@ -2575,6 +2590,7 @@ tcm825x
 tcm_fc
 tcm_loop
 tcp_bic
+tcp_diag
 tcp_highspeed
 tcp_htcp
 tcp_hybla
@@ -2658,7 +2674,6 @@ tpm_atmel
 tpm_nsc
 tps6105x
 tps6105x-regulator
-tps65010
 tps65023-regulator
 tps6507x
 tps6507x-regulator
@@ -2868,6 +2883,13 @@ wimax
 winbond-840
 windfarm_core
 wire
+wis-ov7640
+wis-saa7113
+wis-saa7115
+wis-sony-tuner
+wis-tw2804
+wis-tw9903
+wis-uda1342
 wl1251
 wl1251_sdio
 wl1251_spi
