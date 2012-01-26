@@ -606,7 +606,6 @@ gpio-pca953x
 gpio-pcf857x
 gpio-regulator
 gpio-tps65912
-gpio-twl4030
 gpio-wm831x
 gpio-wm8350
 gpio-wm8994
