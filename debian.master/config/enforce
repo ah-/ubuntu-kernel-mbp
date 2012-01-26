@@ -90,3 +90,7 @@ value CONFIG_EFI_VARS y | !exists CONFIG_EFI_VARS
 # a kernel with the same version.
 (arch armel armhf & value CONFIG_FAT_FS y) | \
  (!arch armel armhf & value CONFIG_FAT_FS m)
+
+# Ensure CONFIG_GPIO_TWL4030 is y for arm, LP:921934
+(arch armel armhf & value CONFIG_GPIO_TWL4030 y) | \
+ (!arch armel armhf & (value CONFIG_GPIO_TWL4030 m | !exists CONFIG_GPIO_TWL4030))
