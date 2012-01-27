@@ -19,7 +19,6 @@
 
 #include <linux/capability.h>
 #include <linux/compat.h>
-#include <linux/module.h>
 #include <linux/err.h>
 #include <linux/errno.h>
 #include <linux/ftrace_event.h>
@@ -647,12 +646,13 @@ void put_seccomp_filters(struct seccomp_filters *orig)
 {
 	if (!orig)
 		return;
-	kref_put(&orig->usage, __put_seccomp_filters);
+	kref_put(orig, __put_seccomp_filters);
 }
 
 /* get_seccomp_filters - increments the reference count of @orig. */
 struct seccomp_filters *get_seccomp_filters(struct seccomp_filters *orig)
 {
+	int usage;
 	if (!orig)
 		return NULL;
 	/* XXX: kref needs overflow prevention support. */
