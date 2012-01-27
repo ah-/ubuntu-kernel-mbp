@@ -9,6 +9,7 @@ drivers/char/lp.ko
 drivers/char/nvram.ko
 drivers/char/ppdev.ko
 drivers/char/raw.ko
+drivers/hv/*
 drivers/input/evbug.ko
 drivers/input/gameport/gameport.ko
 drivers/input/mouse/psmouse.ko
