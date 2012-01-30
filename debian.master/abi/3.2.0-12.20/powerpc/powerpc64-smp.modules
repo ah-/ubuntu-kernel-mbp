@@ -146,7 +146,6 @@ adv7170
 adv7175
 adv7180
 adv7343
-advansys
 adxl34x
 adxl34x-i2c
 adxl34x-spi
@@ -181,23 +180,19 @@ altera_jtaguart
 altera_ps2
 altera-stapl
 altera_uart
-ambassador
 amc6821
 amd5536udc
 amd8111e
-ams
+amd8111_edac
+amd8131_edac
+amd-rng
 ams369fg06
 analog
 ansi_cprng
-ans-lcd
 anubis
 aoe
 apds9802als
 apds990x
-apm_emu
-apm-emulation
-apm_power
-apm-power
 appledisplay
 appletalk
 appletouch
@@ -276,7 +271,6 @@ b43legacy
 b44
 bas_gigaset
 batman-adv
-baycom_epp
 baycom_par
 baycom_ser_fdx
 baycom_ser_hdx
@@ -302,7 +296,6 @@ blowfish_generic
 bluecard_cs
 bluetooth
 bma150
-bmac
 bmp085
 bna
 bnep
@@ -313,7 +306,6 @@ bnx2x
 bonding
 bpa10x
 bpck
-bpck6
 bpqether
 bq20z75
 bq24022
@@ -323,9 +315,9 @@ brcmfmac
 brcmsmac
 brcmutil
 bridge
-briq_panel
 broadsheetfb
 bsd_comp
+bsr
 bt3c_cs
 bt819
 bt856
@@ -346,7 +338,6 @@ budget-av
 budget-ci
 budget-core
 budget-patch
-BusLogic
 bw-qcam
 c4
 c67x00
@@ -431,9 +422,11 @@ configfs
 cordic
 core
 cp210x
+cpc925_edac
 cpia2
-cpqarray
+cpufreq_spudemand
 cpufreq_stats
+cpu-notifier-error-inject
 c-qcam
 cramfs
 crc7
@@ -560,8 +553,6 @@ doc2001plus
 docecc
 docg3
 docprobe
-donauboe
-dpt_i2o
 drbd
 drm
 drm_kms_helper
@@ -669,6 +660,7 @@ eeprom_93xx46
 eeti_ts
 efs
 ehv_bytechan
+electra_cf
 elo
 elsa_cs
 em28xx
@@ -712,7 +704,6 @@ fakephp
 farsync
 fat
 faulty
-fb_sys_fops
 fcoe
 fcrypt
 fdomain
@@ -720,7 +711,6 @@ fdomain_cs
 fealnx
 ff-memless
 firedtv
-firestream
 firewire-core
 firewire-net
 firewire-ohci
@@ -747,7 +737,6 @@ ftdi_sio
 ftl
 fujitsu_ts
 funsoft
-fusb300_udc
 g450_pll
 g760a
 g_acm_ms
@@ -763,7 +752,6 @@ g_dbgp
 gdth
 generic
 generic_bl
-generic_nvram
 gen_probe
 g_ether
 gf128mul
@@ -810,6 +798,7 @@ gpio-pcf857x
 gpio-rdc321x
 gpio-regulator
 gpio-tps65912
+gpio-twl4030
 gpio_vbus
 gpio-vx855
 gpio-wm831x
@@ -874,6 +863,7 @@ gxt4500
 g_zero
 hamachi
 hampshire
+hangcheck-timer
 hanwang
 hci_uart
 hci_vhci
@@ -951,7 +941,6 @@ hid-waltop
 hid-wiimote
 hid-zpff
 hid-zydacron
-hifn_795x
 hisax
 hisax_fcpcipnp
 hisax_isac
@@ -959,7 +948,6 @@ hisax_st5481
 hmc5843
 hmc6352
 hopper
-horizon
 hostap
 hostap_cs
 hostap_pci
@@ -992,7 +980,6 @@ i2c-dev
 i2c-diolan-u2c
 i2c-eg20t
 i2c-gpio
-i2c-hydra
 i2c-i801
 i2c-intel-mid
 i2c-isch
@@ -1003,6 +990,7 @@ i2c-nforce2
 i2c-ocores
 i2c-parport
 i2c-parport-light
+i2c-pasemi
 i2c-pca-platform
 i2c-piix4
 i2c-simtec
@@ -1018,7 +1006,6 @@ i2c-viapro
 i2c-xiic
 i2o_block
 i2o_bus
-i2o_config
 i2o_core
 i2o_proc
 i2o_scsi
@@ -1034,6 +1021,8 @@ ibmaem
 ibmpex
 ib_mthca
 ibmtr_cs
+ibmveth
+ib_qib
 ib_sa
 ib_srp
 ib_ucm
@@ -1169,7 +1158,6 @@ iscsi_tcp
 isdn
 isdn_bsdcomp
 isdnhdlc
-isdnloop
 isicom
 isight_firmware
 isl29003
@@ -1252,8 +1240,6 @@ l2tp_ppp
 l4f00242t03
 l64781
 lanai
-langwell_udc
-lanstreamer
 lapb
 lapbether
 latch-addr-flash
@@ -1348,7 +1334,6 @@ lm92
 lm93
 lm95241
 lm95245
-lmc
 lms283gf05
 lnbp21
 lnbp22
@@ -1371,10 +1356,8 @@ m25p80
 m52790
 m66592-udc
 ma600-sir
-mac53c94
 mac80211
 mac80211_hwsim
-mace
 mac_hid
 macvlan
 macvtap
@@ -1454,7 +1437,6 @@ megaraid_mm
 megaraid_sas
 mem2mem_testdev
 memstick
-mesh
 metronomefb
 mfd
 mga
@@ -1475,6 +1457,7 @@ mlx4_en
 mlx4_ib
 mma8450
 mmc_block
+mmc_spi
 mos7720
 mos7840
 moto_modem
@@ -1517,7 +1500,6 @@ mtdram
 mtdswap
 mtouch
 multipath
-mv643xx_eth
 mvsas
 mvumi
 mwifiex
@@ -1649,14 +1631,11 @@ n_r3964
 ns558
 ns83820
 nsc-ircc
-nsp32
-nsp_cs
 ntc_thermistor
 ntfs
 n_tracerouter
 n_tracesink
 nvidiafb
-nvram
 nxt200x
 nxt6000
 ocfs2
@@ -1666,6 +1645,7 @@ ocfs2_nodemanager
 ocfs2_stackglue
 ocfs2_stack_o2cb
 ocfs2_stack_user
+of_mmc_spi
 ofpart
 of_serial
 old_belkin-sir
@@ -1715,6 +1695,9 @@ parport_ax88796
 parport_cs
 parport_pc
 parport_serial
+pasemi_edac
+pasemi_nand
+pasemi-rng
 pata_ali
 pata_amd
 pata_arasan_cf
@@ -1791,6 +1774,7 @@ pcmciamtd
 pcmcia_rsrc
 pcnet32
 pcnet_cs
+pcrypt
 pcspkr
 pcwd_pci
 pcwd_usb
@@ -1825,7 +1809,6 @@ pm3fb
 pm8001
 pmc551
 pmcraid
-pmu_battery
 pn533
 pn544
 pn_pep
@@ -1850,6 +1833,14 @@ pptp
 prism2_usb
 prism54
 ps2mult
+ps3disk
+ps3flash
+ps3_gelic
+ps3-lpm
+ps3rom
+ps3stor_lib
+ps3vram
+pseries_energy
 psmouse
 pt
 pti
@@ -1861,6 +1852,7 @@ qinfo_probe
 qla1280
 qla2xxx
 qla3xxx
+qla4xxx
 qlcnic
 qlge
 qlogic_cs
@@ -2028,6 +2020,8 @@ rocket
 romfs
 rose
 rotary_encoder
+rpadlpar_io
+rpaphp
 rpcsec_gss_krb5
 rt2400pci
 rt2500pci
@@ -2079,6 +2073,7 @@ rtc-pcf2123
 rtc-pcf50633
 rtc-pcf8563
 rtc-pcf8583
+rtc-ps3
 rtc-r9701
 rtc-rp5c01
 rtc-rs5c348
@@ -2356,6 +2351,7 @@ snd-pcxhr
 snd-pdaudiocf
 snd-portman2x4
 snd-powermac
+snd_ps3
 snd-pt2258
 snd-rawmidi
 snd-riptide
@@ -2521,6 +2517,7 @@ spi-lm70llp
 spi-oc-tiny
 spi-tle62x0
 spi-topcliff-pch
+spufs
 squashfs
 sr030pc30
 ssb
@@ -2562,7 +2559,6 @@ sunkbd
 sunrpc
 svcrdma
 svgalib
-swim3
 sx8
 sym53c500_cs
 sym53c8xx
@@ -2573,9 +2569,6 @@ synclink
 synclink_cs
 synclink_gt
 synclinkmp
-syscopyarea
-sysfillrect
-sysimgblt
 sysv
 t1pci
 target_core_file
@@ -2635,8 +2628,7 @@ test-kstrtox
 test_power
 tg3
 tgr192
-therm_adt746x
-therm_windtunnel
+therm_pm72
 thmc50
 ths7303
 ti_dac7512
@@ -2672,7 +2664,6 @@ tpm_atmel
 tpm_nsc
 tps6105x
 tps6105x-regulator
-tps65010
 tps65023-regulator
 tps6507x
 tps6507x-regulator
@@ -2766,7 +2757,6 @@ ums-usbat
 uninorth-agp
 upd64031a
 upd64083
-uPD98402
 usb8xxx
 usbatm
 usb_debug
@@ -2793,6 +2783,7 @@ uvcvideo
 uvesafb
 uwb
 v4l2-common
+v4l2-compat-ioctl32
 v4l2-int-device
 v4l2-mem2mem
 vcan
@@ -2819,7 +2810,6 @@ videobuf-dma-contig
 videobuf-dma-sg
 videobuf-dvb
 videobuf-vmalloc
-videocodec
 videodev
 virtio
 virtio_balloon
@@ -2881,6 +2871,17 @@ whiteheat
 wimax
 winbond-840
 windfarm_core
+windfarm_cpufreq_clamp
+windfarm_lm75_sensor
+windfarm_max6690_sensor
+windfarm_pid
+windfarm_pm112
+windfarm_pm121
+windfarm_pm81
+windfarm_pm91
+windfarm_smu_controls
+windfarm_smu_sat
+windfarm_smu_sensors
 wire
 wis-ov7640
 wis-saa7113
@@ -2941,7 +2942,6 @@ xfrm_ipcomp
 xfrm_user
 xfs
 xgifb
-xilinx_emaclite
 xilinx_ps2
 xilinx_uartps
 xirc2ps_cs
@@ -3019,7 +3019,6 @@ yealink
 yellowfin
 yenta_socket
 yurex
-zatm
 zaurus
 zcache
 zd1201
@@ -3030,11 +3029,6 @@ zl10036
 zl10039
 zl10353
 zlib
-zlib_deflate
 znet
-zr36016
-zr36050
-zr36060
-zr36067
 zr364xx
 zram

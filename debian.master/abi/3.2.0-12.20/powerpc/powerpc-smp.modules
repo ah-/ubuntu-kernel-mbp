@@ -811,6 +811,7 @@ gpio-pcf857x
 gpio-rdc321x
 gpio-regulator
 gpio-tps65912
+gpio-twl4030
 gpio_vbus
 gpio-vx855
 gpio-wm831x

@@ -4,7 +4,6 @@
 8139too
 8390
 acpi_ipmi
-acpi_memhotplug
 acpi_pad
 acpiphp
 act_csum
@@ -16,8 +15,8 @@ act_pedit
 act_police
 act_simple
 act_skbedit
+aes-i586
 aesni-intel
-aes-x86_64
 af_802154
 af_alg
 af_key
@@ -28,6 +27,7 @@ algif_hash
 algif_skcipher
 ansi_cprng
 anubis
+apm
 appletalk
 arc4
 arptable_filter
@@ -48,7 +48,6 @@ bch
 binfmt_misc
 blowfish_common
 blowfish_generic
-blowfish-x86_64
 bonding
 br2684
 bridge
@@ -166,10 +165,11 @@ gameport
 garp
 gcm
 gf128mul
-ghash-clmulni-intel
 ghash-generic
 gre
 hangcheck-timer
+hv_utils
+hv_vmbus
 ieee802154
 ifb
 igbvf
@@ -373,7 +373,7 @@ rmd320
 rose
 rxkad
 salsa20_generic
-salsa20-x86_64
+salsa20-i586
 sbs
 sbshc
 sch_atm
@@ -407,7 +407,6 @@ seqiv
 serio_raw
 serpent
 serport
-sha1-ssse3
 sha512_generic
 sit
 slip
@@ -462,8 +461,7 @@ tunnel4
 tunnel6
 twofish_common
 twofish_generic
-twofish-x86_64
-twofish-x86_64-3way
+twofish-i586
 ufs
 uli526x
 usb-storage
