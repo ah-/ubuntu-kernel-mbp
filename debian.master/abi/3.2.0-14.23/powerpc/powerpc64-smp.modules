@@ -1498,6 +1498,7 @@ mtd_dataflash
 mtdoops
 mtdram
 mtdswap
+mtip32xx
 mtouch
 multipath
 mvsas

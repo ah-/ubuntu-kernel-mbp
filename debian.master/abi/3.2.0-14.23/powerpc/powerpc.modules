@@ -1516,6 +1516,7 @@ mtd_dataflash
 mtdoops
 mtdram
 mtdswap
+mtip32xx
 mtouch
 multipath
 mv643xx_eth
