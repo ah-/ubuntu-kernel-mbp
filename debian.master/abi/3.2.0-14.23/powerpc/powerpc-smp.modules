@@ -2638,7 +2638,6 @@ test-kstrtox
 test_power
 tg3
 tgr192
-therm_adt746x
 therm_windtunnel
 thmc50
 ths7303
