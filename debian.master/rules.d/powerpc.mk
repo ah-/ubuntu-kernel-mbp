@@ -1,3 +1,4 @@
+human_arch	= PowerPC (32 bit userspace)
 build_arch	= powerpc
 header_arch	= $(build_arch)
 asm_link	= $(build_arch)

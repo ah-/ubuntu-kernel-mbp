@@ -1,3 +1,4 @@
+human_arch	= 64 bit x86
 build_arch	= x86_64
 header_arch	= $(build_arch)
 asm_link	= x86

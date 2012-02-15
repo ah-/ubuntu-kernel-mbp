@@ -1,3 +1,4 @@
+human_arch	= ARM (hard float)
 build_arch	= arm
 header_arch	= arm
 asm_link	= arm
