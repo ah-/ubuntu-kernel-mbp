@@ -1084,7 +1084,6 @@ hptiop
 hp-wmi
 hso
 htc-pasic3
-hv_mouse
 hv_netvsc
 hv_storvsc
 hv_utils

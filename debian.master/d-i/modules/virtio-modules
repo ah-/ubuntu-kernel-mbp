@@ -5,5 +5,4 @@ virtio-rng ?
 hv_vmbus ?
 hv_utils ?
 hv_netvsc ?
-hv_mouse ?
 hv_netvsc ?
