@@ -51,9 +51,10 @@ Section: admin
 Priority: optional
 Depends: ${misc:Depends}
 Replaces: SRCPKGNAME-tools (<= 2.6.32-16.25)
-Description: Linux kernel specific tools for version PKGVER
+Description: Linux kernel version specific tools for version PKGVER
  This package provides the architecture independent parts for kernel
- version locked tools in the PKGVER kernel source.
+ version locked tools (such as perf and x86_energy_perf_policy) for
+ version PGKVER.
 
 Package: linux-headers-PKGVER-ABINUM
 Architecture: all
@@ -84,8 +85,9 @@ Architecture: i386 amd64 powerpc ppc64 armel armhf
 Section: devel
 Priority: optional
 Depends: ${misc:Depends}, ${shlibs:Depends}, linux-tools-common
-Description: Linux kernel tools for version PKGVER-ABINUM
+Description: Linux kernel version specific tools for version PKGVER-ABINUM
  This package provides the architecture dependant parts for kernel
- version locked tools for version PKGVER-ABINUM on
+ version locked tools (such as perf and x86_energy_perf_policy) for
+ version PKGVER-ABINUM on
  =HUMAN=.
 
