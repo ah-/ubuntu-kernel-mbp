@@ -7924,13 +7924,6 @@ static bool intel_enable_rc6(struct drm_device *dev)
 	if (INTEL_INFO(dev)->gen == 5)
 		return 0;
 
-	/*
-	 * Disable rc6 on Sandybridge
-	 */
-	if (INTEL_INFO(dev)->gen == 6) {
-		DRM_DEBUG_DRIVER("Sandybridge: RC6 disabled\n");
-		return 0;
-	}
 	DRM_DEBUG_DRIVER("RC6 enabled\n");
 	return 1;
 }
