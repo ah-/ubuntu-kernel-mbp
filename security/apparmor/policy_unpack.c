@@ -25,6 +25,7 @@
 #include "include/audit.h"
 #include "include/context.h"
 #include "include/match.h"
+#include "include/path.h"
 #include "include/policy.h"
 #include "include/policy_unpack.h"
 #include "include/sid.h"
@@ -523,7 +524,7 @@ static struct aa_profile *unpack_profile(struct aa_ext *e)
 		profile->path_flags |= profile->flags & PFLAG_MEDIATE_DELETED;
 	else
 		/* set a default value if path_flags field is not present */
-		profile->path_flags = PFLAG_MEDIATE_DELETED;
+		profile->path_flags = PFLAG_MEDIATE_DELETED | PATH_CHROOT_REL;
 
 	if (!unpack_u32(e, &(profile->caps.allow.cap[0]), NULL))
 		goto fail;

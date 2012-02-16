@@ -655,6 +655,9 @@ struct aa_profile *aa_alloc_profile(const char *hname)
 		return NULL;
 	}
 
+	/* default to chroot relative paths */
+	profile->path_flags = PATH_CHROOT_REL;
+
 	/* refcount released by caller */
 	return profile;
 }
