@@ -39,6 +39,7 @@ drivers/net/macvtap.ko
 drivers/net/ethernet/8390/ne2k-pci.ko
 drivers/net/netconsole.ko
 drivers/net/ethernet/amd/pcnet32.ko
+drivers/net/hyperv/hv_netvsc.ko
 drivers/net/ppp/*
 drivers/net/slip/*
 drivers/net/veth.ko
@@ -61,6 +62,7 @@ drivers/scsi/scsi_transport_sas.ko
 drivers/scsi/scsi_wait_scan.ko
 drivers/scsi/scsi_tgt.ko
 drivers/scsi/vmw_pvscsi.ko
+drivers/scsi/hv_storvsc.ko
 drivers/usb/storage/usb-storage.ko
 drivers/video/cirrusfb.ko
 drivers/video/output.ko
