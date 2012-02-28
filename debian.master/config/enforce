@@ -99,3 +99,7 @@ value CONFIG_EFI_VARS y | !exists CONFIG_EFI_VARS
 # See LP:923094
 !exists CONFIG_THERM_ADT746X | \
  (flavour powerpc powerpc-smp & value CONFIG_THERM_ADT746X y)
+
+# Ensure CONFIG_NVRAM is y for powerpc and powerpc-smp, LP:942193
+(flavour powerpc powerpc-smp & value CONFIG_NVRAM y) | \
+ (value CONFIG_NVRAM m | !exists CONFIG_NVRAM)
