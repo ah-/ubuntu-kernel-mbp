@@ -183,3 +183,8 @@ Priority: extra
 Description: vlan modules
  This package contains vlan (8021.Q) modules.
 
+Package: ipmi-modules
+Depends: kernel-image
+Priority: standard
+Description: ipmi modules
+

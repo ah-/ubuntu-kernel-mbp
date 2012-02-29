@@ -12,3 +12,4 @@ nfs-modules
 speakup-modules
 ppp-modules
 sata-modules
+ipmi-modules
