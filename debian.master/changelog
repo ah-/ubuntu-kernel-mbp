@@ -6,6 +6,8 @@ linux (3.2.0-18.28) UNRELEASED; urgency=low
 
   [ Upstream Kernel Changes ]
 
+  * rebase to v3.2.9
+    - LP: #900802
   * rebase to v3.2.8
   * rebase to v3.2.7
     - LP: #930842
