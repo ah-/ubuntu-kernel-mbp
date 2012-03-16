@@ -1011,6 +1011,7 @@ extern int i915_panel_ignore_lid __read_mostly;
 extern unsigned int i915_powersave __read_mostly;
 extern int i915_semaphores __read_mostly;
 extern unsigned int i915_lvds_downclock __read_mostly;
+extern int i915_lvds_channel __read_mostly;
 extern int i915_panel_use_ssc __read_mostly;
 extern int i915_vbt_sdvo_panel_type __read_mostly;
 extern int i915_enable_rc6 __read_mostly;

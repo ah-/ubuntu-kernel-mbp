@@ -360,6 +360,11 @@ static bool is_dual_link_lvds(struct drm_i915_private *dev_priv,
 			      unsigned int reg)
 {
 	unsigned int val;
+
+	/* use the module option value if specified */
+	if (i915_lvds_channel > 0)
+		return i915_lvds_channel == 2;
+
 	/* BIOS should set the proper LVDS register value at boot, but
 	 * in reality, it doesn't set the value when the lid is closed;
 	 * thus when a machine is booted with the lid closed, the LVDS
