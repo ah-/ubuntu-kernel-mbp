@@ -2922,7 +2922,7 @@ DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_INTEL, 0x65fa, quirk_intel_mc_errata);
 */
 
 #define I5S_REG_AMAP		0x90
-#define I5S_PREFIX			"[i5s_3400s ** FIXUP] "
+#define I5S_PREFIX		"[i5s_3400s ** FIXUP] "
 static int i5s_3400s_sata_ahci;
 
 static int __init i5s_3400s_force_ahci_setup(char *str)
@@ -2958,6 +2958,7 @@ static void __devinit i5s_3400s_fixup(struct pci_dev *dev)
 		}
 	}
 }
+
 static void i5s_3400s_fixup_resume(struct pci_dev *dev)
 {
 	u16 amap;
@@ -2983,9 +2984,47 @@ static void i5s_3400s_fixup_resume(struct pci_dev *dev)
 			"SATA controller mode: AHCI (0x%04x)\n", amap);
 	}
 }
+
 DECLARE_PCI_FIXUP_RESUME_EARLY(PCI_VENDOR_ID_INTEL, 0x3b09,
 	i5s_3400s_fixup_resume);
 DECLARE_PCI_FIXUP_EARLY(PCI_VENDOR_ID_INTEL, 0x3b09, i5s_3400s_fixup);
+
+#define I5S_REG_DEVEN		0x54
+#define I5S_IGD_PREFIX		"[i5s ** FIXUP] "
+static int i5s_enable_igd;
+
+static int __init i5s_enable_igd_setup(char *str)
+{
+	i5s_enable_igd = 1;
+	return 0;
+}
+early_param("i5s_enable_igd", i5s_enable_igd_setup);
+
+static void __devinit i5s_enable_igd_fixup(struct pci_dev *dev)
+{
+	u8 deven;
+	pci_read_config_byte(dev, I5S_REG_DEVEN, &deven);
+	if (deven & 0x8) {
+		printk(KERN_DEBUG I5S_IGD_PREFIX
+			"Internal Graphics Engine: enabled and visible (0x%04x)\n",
+			deven);
+		i5s_enable_igd = 1;
+	} else {
+		printk(KERN_DEBUG I5S_IGD_PREFIX
+			"Internal Graphics Engine: disabled and hidden (0x%04x)\n",
+			deven);
+		if (i5s_enable_igd) {
+			deven |= 0x8;
+			printk(KERN_DEBUG I5S_IGD_PREFIX
+				"Enabling Internal Graphics Engine (0x%04x)\n",
+				deven);
+			pci_write_config_byte(dev, I5S_REG_DEVEN, deven);
+		}
+	}
+}
+
+DECLARE_PCI_FIXUP_RESUME_EARLY(PCI_VENDOR_ID_INTEL, 0x0044, i5s_enable_igd_fixup);
+DECLARE_PCI_FIXUP_EARLY(PCI_VENDOR_ID_INTEL, 0x0044, i5s_enable_igd_fixup);
 
 static void pci_do_fixups(struct pci_dev *dev, struct pci_fixup *f,
 			  struct pci_fixup *end)
