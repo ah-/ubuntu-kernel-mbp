@@ -31,6 +31,7 @@
 #include <linux/kernel.h>
 #include <linux/slab.h>
 #include <linux/vgaarb.h>
+#include <linux/vga_switcheroo.h>
 #include <drm/drm_edid.h>
 #include "drmP.h"
 #include "intel_drv.h"
@@ -7486,8 +7487,13 @@ static void intel_setup_outputs(struct drm_device *dev)
 	bool dpd_is_edp = false;
 	bool has_lvds = false;
 
-	if (IS_MOBILE(dev) && !IS_I830(dev))
+	if (IS_MOBILE(dev) && !IS_I830(dev)) {
+		/* Switch mux so lvds is detectable */
+		vga_switcheroo_lock_ddc(dev->pdev);
 		has_lvds = intel_lvds_init(dev);
+		vga_switcheroo_unlock_ddc(dev->pdev);
+	}
+
 	if (!has_lvds && !HAS_PCH_SPLIT(dev)) {
 		/* disable the panel fitter on everything but LVDS */
 		I915_WRITE(PFIT_CONTROL, 0);
