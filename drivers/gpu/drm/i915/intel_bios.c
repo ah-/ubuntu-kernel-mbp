@@ -173,6 +173,27 @@ get_lvds_dvo_timing(const struct bdb_lvds_lfp_data *lvds_lfp_data,
 	return (struct lvds_dvo_timing *)(entry + dvo_timing_offset);
 }
 
+/* read the initial LVDS register value for the given panel mode */
+static unsigned int get_lvds_reg_val(const struct bdb_header *bdb,
+				     const struct bdb_lvds_lfp_data_ptrs *ptrs,
+				     int index,
+				     struct drm_display_mode *mode)
+{
+	unsigned int ofs;
+	const struct lvds_fp_timing *timing;
+
+	if (index >= ARRAY_SIZE(ptrs->ptr))
+		return 0;
+	ofs = ptrs->ptr[index].fp_timing_offset;
+	if (ofs + sizeof(*timing) > bdb->bdb_size)
+		return 0;
+	timing = (const struct lvds_fp_timing *)((const u8 *)bdb + ofs);
+	/* check the resolution, just to be sure */
+	if (timing->x_res != mode->hdisplay || timing->y_res != mode->vdisplay)
+		return 0;
+	return timing->lvds_reg_val;
+}
+
 /* Try to find integrated panel data */
 static void
 parse_lfp_panel_data(struct drm_i915_private *dev_priv,
@@ -243,6 +264,11 @@ parse_lfp_panel_data(struct drm_i915_private *dev_priv,
 			      "Normal Clock %dKHz, downclock %dKHz\n",
 			      panel_fixed_mode->clock, 10*downclock);
 	}
+
+	dev_priv->bios_lvds_val = get_lvds_reg_val(bdb, lvds_lfp_data_ptrs,
+						   lvds_options->panel_type,
+						   panel_fixed_mode);
+	DRM_DEBUG_KMS("VBT initial LVDS value %x\n", dev_priv->bios_lvds_val);
 }
 
 /* Try to find sdvo panel data */
