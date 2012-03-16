@@ -780,6 +780,7 @@ struct drm_nouveau_private {
 	struct nouveau_vm *chan_vm;
 
 	struct nvbios vbios;
+	uint32_t rom_window;
 
 	struct nv04_mode_state mode_reg;
 	struct nv04_mode_state saved_reg;

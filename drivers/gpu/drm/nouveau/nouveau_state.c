@@ -510,6 +510,69 @@ nouveau_vga_set_decode(void *priv, bool state)
 		return VGA_RSRC_NORMAL_IO | VGA_RSRC_NORMAL_MEM;
 }
 
+static bool upload_vbios_pramin(struct drm_device *dev)
+{
+	struct drm_nouveau_private *dev_priv = dev->dev_private;
+	uint32_t old_bar0_pramin = 0;
+	unsigned int i = 0;
+
+	if (dev_priv->chipset < 0x04) {
+		return false /*ECARD*/;
+	}
+
+	if (dev_priv->card_type >= NV_50) {
+		u64 addr = (u64)(nv_rd32(dev, 0x619f04) & 0xffffff00) << 8;
+		if (!addr) {
+			addr  = (u64)nv_rd32(dev, 0x1700) << 16;
+			addr += 0xf0000;
+		}
+
+		old_bar0_pramin = nv_rd32(dev, 0x1700);
+		nv_wr32(dev, 0x1700, addr >> 16);
+	}
+
+	for (i = 0; i < dev_priv->vbios.length; i++)
+		nv_wr08(dev, NV_PRAMIN_OFFSET + i, dev_priv->vbios.data[i]);
+
+	if (dev_priv->card_type >= NV_50)
+		nv_wr32(dev, 0x1700, old_bar0_pramin);
+
+	return true;
+}
+
+static void save_vbios(struct drm_device *dev)
+{
+	struct drm_nouveau_private *dev_priv = dev->dev_private;
+	dev_priv->rom_window = nv_rd32(dev, 0x619f04) & 0xffffff00;
+}
+
+static bool restore_vbios(struct drm_device *dev)
+{
+	struct drm_nouveau_private *dev_priv = dev->dev_private;
+	uint32_t old_rom_window;
+	uint32_t rom_window;
+
+	if (!dev_priv->rom_window) {
+		NV_INFO(dev, "saved rom window is zero, not restoring vbios\n");
+		return true;
+	}
+
+	old_rom_window = nv_rd32(dev, 0x619f04);
+
+	if (old_rom_window & 0xffffff00) {
+		NV_INFO(dev, "rom window (0x%x) looks ok, not restoring vbios\n", 
+					old_rom_window);
+		return true;
+	}
+
+	rom_window = (old_rom_window & 0xff) | dev_priv->rom_window;
+	nv_wr32(dev, 0x619f04, rom_window);
+	NV_INFO(dev, "Restored rom window to %x, was %x\n", 
+					rom_window, old_rom_window);
+
+	return upload_vbios_pramin(dev);
+}
+
 static void nouveau_switcheroo_set_state(struct pci_dev *pdev,
 					 enum vga_switcheroo_state state)
 {
@@ -519,12 +582,14 @@ static void nouveau_switcheroo_set_state(struct pci_dev *pdev,
 		printk(KERN_ERR "VGA switcheroo: switched nouveau on\n");
 		dev->switch_power_state = DRM_SWITCH_POWER_CHANGING;
 		nouveau_pci_resume(pdev);
+		restore_vbios(dev);
 		drm_kms_helper_poll_enable(dev);
 		dev->switch_power_state = DRM_SWITCH_POWER_ON;
 	} else {
 		printk(KERN_ERR "VGA switcheroo: switched nouveau off\n");
 		dev->switch_power_state = DRM_SWITCH_POWER_CHANGING;
 		drm_kms_helper_poll_disable(dev);
+		save_vbios(dev);
 		nouveau_switcheroo_optimus_dsm();
 		nouveau_pci_suspend(pdev, pmm);
 		dev->switch_power_state = DRM_SWITCH_POWER_OFF;
