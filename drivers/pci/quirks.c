@@ -2906,6 +2906,87 @@ DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_INTEL, 0x65f8, quirk_intel_mc_errata);
 DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_INTEL, 0x65f9, quirk_intel_mc_errata);
 DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_INTEL, 0x65fa, quirk_intel_mc_errata);
 
+/*
+ * Workaround for EFIs/Bios that do not allow to set (and/or restore upon
+ * resume) the SATA controller AHCI mode within the Intel 5 Series/3400
+ * Series chipset. The SATA controller mode is registered during the boot
+ * process. In case of a resume, these fixups check the current controller
+ * mode against the earlier registered one and will restore it to AHCI
+ * mode if necessary. The user can force AHCI by setting the kernel
+ * command parameter 'i5s_3400s_force_ahci=1'.
+ *
+ * The PCI device id (and register contents) change during mode switch, so
+ * these fixups are attached to the LPC and expect that:
+ * -) the SATA controller is on 00:1f.2
+ * -) the SATA controller device is initialized/resumed *after* the LPC device
+*/
+
+#define I5S_REG_AMAP		0x90
+#define I5S_PREFIX			"[i5s_3400s ** FIXUP] "
+static int i5s_3400s_sata_ahci;
+
+static int __init i5s_3400s_force_ahci_setup(char *str)
+{
+	i5s_3400s_sata_ahci = 1;
+	return 0;
+}
+early_param("i5s_3400s_force_ahci", i5s_3400s_force_ahci_setup);
+
+static void __devinit i5s_3400s_fixup(struct pci_dev *dev)
+{
+	u16 amap;
+	pci_bus_read_config_word(dev->bus, PCI_DEVFN(PCI_SLOT(dev->devfn), 2),
+		I5S_REG_AMAP, &amap);
+	if (amap & 0x60) {
+		printk(KERN_DEBUG I5S_PREFIX
+			"SATA controller mode: AHCI (0x%04x)\n", amap);
+		i5s_3400s_sata_ahci = 1;
+	} else {
+		printk(KERN_DEBUG I5S_PREFIX
+			"SATA controller mode: NON AHCI (0x%04x)\n", amap);
+		/* only honor i5s_3400s_sata ahci if the controller is
+		in a mode were it's safe (IDE Mode, MV == 0x0) to
+		switch to AHCI */
+		if (i5s_3400s_sata_ahci && (amap & 0xC3) == 0) {
+			amap |= 0x60;
+			printk(KERN_DEBUG I5S_PREFIX
+				"Putting SATA controller into AHCI (0x%04x)\n",
+				amap);
+			pci_bus_write_config_word(dev->bus,
+				PCI_DEVFN(PCI_SLOT(dev->devfn), 2),
+				I5S_REG_AMAP, amap);
+		}
+	}
+}
+static void i5s_3400s_fixup_resume(struct pci_dev *dev)
+{
+	u16 amap;
+	pci_bus_read_config_word(dev->bus, PCI_DEVFN(PCI_SLOT(dev->devfn), 2),
+		I5S_REG_AMAP, &amap);
+	if (!(amap & 0x60)) {
+		printk(KERN_DEBUG I5S_PREFIX
+			"SATA controller mode: NON AHCI (0x%04x)\n", amap);
+		if (i5s_3400s_sata_ahci && (amap & 0xc3) == 0) {
+			amap &= ~BIT(7);
+			amap |= 0x60;
+			printk(KERN_DEBUG I5S_PREFIX
+				"Restoring AHCI mode of SATA controller (0x%04x)\n",
+				amap);
+			/* MAP - Address Map Register:  AHCI mode + 6 SATA
+			ports */
+			pci_bus_write_config_word(dev->bus,
+				PCI_DEVFN(PCI_SLOT(dev->devfn), 2),
+				I5S_REG_AMAP, amap);
+		}
+	} else {
+		printk(KERN_DEBUG I5S_PREFIX
+			"SATA controller mode: AHCI (0x%04x)\n", amap);
+	}
+}
+DECLARE_PCI_FIXUP_RESUME_EARLY(PCI_VENDOR_ID_INTEL, 0x3b09,
+	i5s_3400s_fixup_resume);
+DECLARE_PCI_FIXUP_EARLY(PCI_VENDOR_ID_INTEL, 0x3b09, i5s_3400s_fixup);
+
 static void pci_do_fixups(struct pci_dev *dev, struct pci_fixup *f,
 			  struct pci_fixup *end)
 {
