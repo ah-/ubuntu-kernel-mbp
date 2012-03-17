@@ -508,10 +508,13 @@ int vga_switcheroo_lock_ddc(struct pci_dev *pdev)
 	}
 
 	if (vgasr_priv.handler && vgasr_priv.handler->switchddc) {
-			/*&& client_id != -1) {*/
+		/* hack since not all clients might be registered yet */
+		if (client_id == -1)
+			client_id = VGA_SWITCHEROO_IGD;
+
 		mutex_unlock(&vgasr_mutex);
 		mutex_lock(&vgasr_ddc_mutex);
-		return vgasr_priv.handler->switchddc(/*client_id*/ VGA_SWITCHEROO_IGD);
+		return vgasr_priv.handler->switchddc(client_id);
 	}
 
 	mutex_unlock(&vgasr_mutex);
@@ -532,8 +535,13 @@ void vga_switcheroo_unlock_ddc(struct pci_dev *pdev)
 			client_id = vgasr_priv.clients[i].id;
 	}
 
-	if (vgasr_priv.handler && vgasr_priv.handler->switchddc)
-		vgasr_priv.handler->switchddc(/*client_id*/ VGA_SWITCHEROO_DIS);
+	if (vgasr_priv.handler && vgasr_priv.handler->switchddc) {
+		/* see lock_ddc */
+		if (client_id == -1)
+			client_id = VGA_SWITCHEROO_DIS;
+
+		vgasr_priv.handler->switchddc(client_id);
+	}
 
 	mutex_unlock(&vgasr_mutex);
 	mutex_unlock(&vgasr_ddc_mutex);
