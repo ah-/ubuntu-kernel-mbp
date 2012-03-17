@@ -40,12 +40,14 @@ struct vga_switcheroo_client {
 };
 
 static DEFINE_MUTEX(vgasr_mutex);
+static DEFINE_MUTEX(vgasr_ddc_mutex);
 
 struct vgasr_priv {
 
 	bool active;
 	bool delayed_switch_active;
 	enum vga_switcheroo_client_id delayed_client_id;
+	int ddc_client_before;
 
 	struct dentry *debugfs_root;
 	struct dentry *switch_file;
@@ -490,3 +492,38 @@ err:
 }
 EXPORT_SYMBOL(vga_switcheroo_process_delayed_switch);
 
+int vga_switcheroo_lock_ddc(struct pci_dev *pdev)
+{
+	int client_id = -1;
+	int i;
+
+	mutex_lock(&vgasr_mutex);
+	for (i = 0; i < VGA_SWITCHEROO_MAX_CLIENTS; i++) {
+		if (vgasr_priv.clients[i].pdev == pdev)
+			client_id = vgasr_priv.clients[i].id;
+		if (vgasr_priv.clients[i].active)
+			vgasr_priv.ddc_client_before = i;
+	}
+	mutex_unlock(&vgasr_mutex);
+
+	printk(KERN_INFO "vga_switcheroo: ddc lock\n");
+	if (vgasr_priv.handler && vgasr_priv.handler->switchddc
+			&& client_id != -1) {
+		mutex_lock(&vgasr_ddc_mutex);
+		return vgasr_priv.handler->switchddc(client_id);
+	}
+	return 0;
+}
+EXPORT_SYMBOL(vga_switcheroo_lock_ddc);
+
+void vga_switcheroo_unlock_ddc(struct pci_dev *pdev)
+{
+	printk(KERN_INFO "vga_switcheroo: ddc unlock\n");
+	mutex_lock(&vgasr_mutex);
+	if (vgasr_priv.handler && vgasr_priv.handler->switchddc)
+		vgasr_priv.handler->switchddc(vgasr_priv.ddc_client_before);
+	mutex_unlock(&vgasr_mutex);
+
+	mutex_unlock(&vgasr_ddc_mutex);
+}
+EXPORT_SYMBOL(vga_switcheroo_unlock_ddc);

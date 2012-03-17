@@ -22,6 +22,7 @@ enum vga_switcheroo_client_id {
 
 struct vga_switcheroo_handler {
 	int (*switchto)(enum vga_switcheroo_client_id id);
+	int (*switchddc)(enum vga_switcheroo_client_id id);
 	int (*power_state)(enum vga_switcheroo_client_id id,
 			   enum vga_switcheroo_state state);
 	int (*init)(void);
@@ -43,6 +44,9 @@ int vga_switcheroo_register_handler(struct vga_switcheroo_handler *handler);
 void vga_switcheroo_unregister_handler(void);
 
 int vga_switcheroo_process_delayed_switch(void);
+
+int vga_switcheroo_lock_ddc(struct pci_dev *dev);
+void vga_switcheroo_unlock_ddc(struct pci_dev *dev);
 
 #else
 
