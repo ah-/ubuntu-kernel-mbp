@@ -543,7 +543,7 @@ static bool upload_vbios_pramin(struct drm_device *dev)
 static void save_vbios(struct drm_device *dev)
 {
 	struct drm_nouveau_private *dev_priv = dev->dev_private;
-	dev_priv->rom_window = nv_rd32(dev, 0x619f04) & 0xffffff00;
+	dev_priv->rom_window = nv_rd32(dev, 0x619f04);
 }
 
 static bool restore_vbios(struct drm_device *dev)
@@ -565,10 +565,9 @@ static bool restore_vbios(struct drm_device *dev)
 		return true;
 	}
 
-	rom_window = (old_rom_window & 0xff) | dev_priv->rom_window;
-	nv_wr32(dev, 0x619f04, rom_window);
+	nv_wr32(dev, 0x619f04, dev_priv->rom_window);
 	NV_INFO(dev, "Restored rom window to %x, was %x\n", 
-					rom_window, old_rom_window);
+			dev_priv->rom_window, old_rom_window);
 
 	return upload_vbios_pramin(dev);
 }
@@ -873,6 +872,7 @@ out_bios:
 out_display_early:
 	engine->display.late_takedown(dev);
 out:
+	vga_switcheroo_unregister_client(dev->pdev);
 	vga_client_register(dev->pdev, NULL, NULL, NULL);
 	return ret;
 }
@@ -934,6 +934,7 @@ static void nouveau_card_takedown(struct drm_device *dev)
 	nouveau_pm_fini(dev);
 	nouveau_bios_takedown(dev);
 
+	vga_switcheroo_unregister_client(dev->pdev);
 	vga_client_register(dev->pdev, NULL, NULL, NULL);
 }
 
