@@ -338,7 +338,8 @@ void nouveau_switcheroo_optimus_dsm(void)
 
 void nouveau_unregister_dsm_handler(void)
 {
-	vga_switcheroo_unregister_handler();
+	/* TODO: only unregister if we registered before */
+	/*vga_switcheroo_unregister_handler();*/
 }
 
 /* retrieve the ROM in 4k blocks */
